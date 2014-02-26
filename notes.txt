@@ -1,0 +1,7 @@
+Launch mongo
+mongod --dbpath /Users/dobridobrev/Documents/programming/mongoData
+
+gems:
+'json'
+'securerandom'
+''
