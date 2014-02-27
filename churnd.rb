@@ -27,6 +27,13 @@ get '/register' do
 	erb :register
 end
 
+post '/register' do
+	@json = JSON.parse(request.body.read)
+	puts @json["name"]
+	content_type :json
+	{:ret => 'win'}.to_json
+end
+
 get '/contact' do
 	erb :contact
 end

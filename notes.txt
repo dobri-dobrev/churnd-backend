@@ -8,3 +8,18 @@ gems:
 
 Mongo stuff
 dbname: churndDB
+
+customer has many users
+each user contains records of interactions
+
+
+To deploy:
+localhost is hardcoded in register.js 
+
+
+
+Known bugs:
+
+
+//NEED TO VALIDATE UNIQUENESS OF COMPANY NAME
+//not doing email validation

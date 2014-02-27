@@ -33,9 +33,19 @@
 		    </div>
 		</div>
 
-	    <div class="container">
-
-	      <h1>Register</h1>
+	    <div class="container" id = "register-container">
+	    	
+	      <form>
+	        <fieldset>
+	          <legend>Register</legend>
+	          
+	          <input type="text" placeholder="Company Name" id = "register-name-field"> </br>
+	          <input type="text" placeholder="Contact Email" id= "register-email-field"> </br>
+	          <input type="password" placeholder="Password" id="register-password-field">
+	          <span class="help-block">Needs to be at least 6 characters</span>
+	          <button type="submit" class="btn" id="register-submit-button">Submit</button>
+	        </fieldset>
+	      </form>
 	      
 
 		</div> 
@@ -44,5 +54,6 @@
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="js/register.js"></script>
 	</body>
 </html>
