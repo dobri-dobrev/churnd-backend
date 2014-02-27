@@ -5,3 +5,6 @@ gems:
 'json'
 'securerandom'
 ''
+
+Mongo stuff
+dbname: churndDB
