@@ -5,6 +5,21 @@ require 'bcrypt'
 require './db.rb'
 # require 'mongo'
 
+['/hello', '/projects'].each do |path|
+    before path do
+        if session[:name] == nil
+        	redirect '/login'
+        else
+        	c = Client.where(name: session[:name]).to_a
+    		if c.length==0
+    			redirect '/login'
+    		else
+    			@current_client = c[0]
+    		end
+        end
+    end
+end
+
 configure do
  	Mongoid.load!("mongoid.yml")
  	use Rack::Session::Cookie, :secret => 'naigolemiqborec'
@@ -12,15 +27,10 @@ end
 
 
 get '/hello' do
+	puts @current_client.name
 	content_type :json
-	Utils.test()
 	{ :key1 => 'value1', :key2 => 'value2' }.to_json
 end	
-
-get '/registerNewCustomer' do
-	content_type :json
-	{ :key1 => 'value1', :key2 => 'value2' }.to_json
-end
 
 get '/' do
 	erb :index
@@ -30,7 +40,7 @@ get '/register' do
 	erb :register
 end
 
-get '/project' do
+get '/projects' do
 	erb :project
 end
 

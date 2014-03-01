@@ -26,8 +26,7 @@ $(function(){
 		  dataType:'json',
 		  data: data,
 		  success: function(json){
-		  	console.dir(json);
-		  	window.location.replace("/");
+		  	window.location.replace("/project");
 		  },
 		  error: function(){
 		  	prependToContainer("Username taken");

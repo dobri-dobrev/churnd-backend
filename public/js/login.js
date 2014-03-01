@@ -21,7 +21,7 @@ $(function(){
 		  dataType:'json',
 		  data: data,
 		  success: function(json){
-		  	window.location.replace("/");
+		  	window.location.replace("/project");
 		  },
 		  error: function(){
 		  	prependToContainer("Username and password combination not found");
