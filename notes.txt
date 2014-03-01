@@ -15,11 +15,12 @@ each user contains records of interactions
 
 To deploy:
 localhost is hardcoded in register.js 
+localhost is hardcoded in db part of churnd.rb
 
 
 
 Known bugs:
 
-
+//need to implement password changing...
 //NEED TO VALIDATE UNIQUENESS OF COMPANY NAME
 //not doing email validation

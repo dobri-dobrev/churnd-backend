@@ -20,10 +20,11 @@ $(function(){
 		data['password'] = $("#register-password-field").val();
 		console.dir(data);
 		$.ajax({
-		  type: "POST",
-		  url: 'http://localhost:4567/register',
+	      type: 'POST',
+	      accepts: "application/json",
+		  url: 'http://localhost:9292/register',
 		  dataType:'json',
-		  data: JSON.stringify(data),
+		  data: data,
 		  success: function(json){
 		  	console.dir(json);
 		  }

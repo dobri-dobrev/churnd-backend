@@ -1,11 +1,13 @@
 require 'sinatra'
-require './User.rb'
 require './utils'
 require 'json'
+require 'bcrypt'
+require './db.rb'
+# require 'mongo'
 
-# configure do
-# 	db = Mongo::Connection.new("localhost", 27017).db("testdb")
-# end
+configure do
+ 	Mongoid.load!("mongoid.yml")
+end
 
 
 get '/hello' do
@@ -28,8 +30,10 @@ get '/register' do
 end
 
 post '/register' do
-	@json = JSON.parse(request.body.read)
-	puts @json["name"]
+	puts params[:password]
+	password_salt = BCrypt::Engine.generate_salt
+	password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
+	Client.create(name: params[:name], email: params[:email], password_salt: password_salt, password_hash: password_hash)
 	content_type :json
 	{:ret => 'win'}.to_json
 end
