@@ -1,36 +1,36 @@
 <!DOCTYPE html>
- <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Dashboard</title>
-    <link rel="stylesheet" href="css/foundation.css" />
-    <script src="js/vendor/modernizr.js"></script>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Dashboard</title>
+  <link rel="stylesheet" href="css/foundation.css" />
+  <script src="js/vendor/modernizr.js"></script>
+</head>
 
 <body>
   <nav class="top-bar" data-topbar="">
-      <ul class="title-area">
-        <li class="name">
-          <h1><a href="#">Churnd</a></h1>
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="#">Churnd</a></h1>
+      </li>
+    </ul>
+    <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right show-for-large-up">
+        <li class="has-dropdown not-click">
+          <a href="#">Armaan</a>
+          <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li>
+            <li><a href="#">Account Details</a></li>
+          </ul>
         </li>
       </ul>
-    <section class="top-bar-section">
-        <!-- Right Nav Section -->
-        <ul class="right show-for-large-up">
-          <li class="has-dropdown not-click">
-            <a href="#">Armaan</a>
-            <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li>
-              <li><a href="#">Account Details</a></li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-   </nav>
-    
-<hr/>
-    
-<!-- Project Panel -->
-<div class="row">
+    </section>
+  </nav>
+
+  <hr/>
+
+  <!-- Project Panel -->
+  <div class="row">
     <div class="large-12 columns">
       <div class="panel">
         <h4>Try Churnd!</h4>
@@ -39,12 +39,42 @@
             <p>Keep users on board</p>
           </div>
           <div class="large-3 columns">
-            <a href="addproject" class="radius button right">Add a Project</a>
+            <a href="#" data-reveal-id="firstModal" class="radius button right">Add a Project</a>
           </div>
         </div>
       </div>
     </div>
+
+
+
+
   </div>
+
+<div id="firstModal" class="reveal-modal" data-reveal>
+
+<h2>Create New Project</h2>
+ <form> 
+  <!-- Row 1 -->
+  <div class="row"> <div class="small-8">  <div class="row">
+    <div class="small-3 columns">  <label for="right-label" class="right inline">Project Name:</label>  </div> 
+    <div class="small-9 columns"> <input id="project_create_name_field" type="text" id="right-label" placeholder="Enter Name"> </div>
+  </div>  </div> </div>
+
+  <!-- Row 2 -->
+  <div class="row"> <div class="small-8">  <div class="row">
+    <div class="small-3 columns">  <label for="right-label" class="right inline">URL:</label>  </div> 
+    <div class="small-9 columns"> <input type="text" id="project_create_url_field" placeholder="Enter URL"> </div>
+  </div>  </div> </div>
+
+  <div class="row"> <div class="small-8">  <div class="row">
+  <a href="#" id="project_create_submit_button" class="radius button right">Submit</a>
+  </div>  </div> </div>
+
+
+</form>
+    <!-- <p><a href="#" data-reveal-id="secondModal" class="secondary button">Second Modal...</a></p> -->
+  <a class="close-reveal-modal">&#215;</a>
+</div>
 
   <!-- Footer -->
   
@@ -65,13 +95,13 @@
     </div> 
   </footer>
 
-    <script src="js/vendor/jquery.js"></script>
-    <script src="js/foundation.min.js"></script>
-    <script>
-      $(document).foundation();
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/foundation.min.js"></script>
+  <script>
+  $(document).foundation();
 
-      var doc = document.documentElement;
-      doc.setAttribute('data-useragent', navigator.userAgent);
-    </script>
-  </body>
+  var doc = document.documentElement;
+  doc.setAttribute('data-useragent', navigator.userAgent);
+  </script>
+</body>
 </html>
