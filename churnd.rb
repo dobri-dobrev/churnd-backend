@@ -89,6 +89,11 @@ get '/login' do
 	erb :login
 end
 
+post '/api/register_event'
+#unique id for project + email+ event name
+	{:key => "test"}.to_json
+end
+
 post '/login' do
 	c = Client.where(name: params[:name]).to_a
 	if c.length==0
