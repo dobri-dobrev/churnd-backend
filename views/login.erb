@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 		<style>
 		    body {
-		       padding-top: 60px; 
+		       padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 		    }
 		</style>
 
@@ -23,8 +23,8 @@
 		          </button>
 		          <a class="brand" href="/">Churnd</a>
 		          <div class="nav-collapse collapse">
-		            <ul class="nav navbar-nav navbar-left">
-		              <li class="active"><a href="/">Home</a></li>
+		            <ul class="nav">
+		              <li><a href="/">Home</a></li>
 		              <li><a href="/register">Register</a></li>
 		              <li><a href="/contact">Contact</a></li>
 		            </ul>
@@ -42,14 +42,25 @@
 		    </div>
 		</div>
 
-	    <div class="container">
-			<h1>Home</h1>
-	    </div> 
+	    <div class="container" id = "login-container">
+	    	
+	      <form>
+	        <fieldset>
+	          <legend>Login</legend>
+	          
+	          <input type="text" placeholder="Company Name" id = "login-name-field"> </br>
+	          <input type="password" placeholder="Password" id="login-password-field"></br>
+	          <button type="submit" class="btn" id="login-submit-button">Submit</button>
+	        </fieldset>
+	      </form>
+	      
 
-
+		</div> 
+		
 
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="js/login.js"></script>
 	</body>
 </html>

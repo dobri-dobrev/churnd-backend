@@ -15,12 +15,13 @@ each user contains records of interactions
 
 To deploy:
 localhost is hardcoded in register.js 
-localhost is hardcoded in db part of churnd.rb
+localhost is hardcoded in login.js 
+localhost is hardcoded in mongoid.yml
 
 
 
 Known bugs:
-
+//need a better cookie secret that is linked to an ENV variable connect it to export for prod
 //need to implement password changing...
-//NEED TO VALIDATE UNIQUENESS OF COMPANY NAME
 //not doing email validation
+//think about displaying session[:name] in header of views

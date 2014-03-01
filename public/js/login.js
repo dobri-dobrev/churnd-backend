@@ -1,36 +1,30 @@
 $(function(){
-	$("#register-submit-button").click(function(event){
+	$("#login-submit-button").click(function(event){
 		$(".alert").remove();
 		event.preventDefault();
-		if($("#register-name-field").val().length == 0){
+		if($("#login-name-field").val().length == 0){
 			prependToContainer("Please add a company name");
 			return;
 		}
-		if($("#register-email-field").val().length == 0){
-			prependToContainer("Please add a valid email");
-			return;
-		}
-		if($("#register-password-field").val().length < 6){
+		if($("#login-password-field").val().length < 6){
 			prependToContainer("Please add a valid password");
 			return;
 		}
 		data = {};
-		data['name'] = $("#register-name-field").val();
-		data['email'] = $("#register-email-field").val();
-		data['password'] = $("#register-password-field").val();
+		data['name'] = $("#login-name-field").val();
+		data['password'] = $("#login-password-field").val();
 		console.dir(data);
 		$.ajax({
 	      type: 'POST',
 	      accepts: "application/json",
-		  url: 'http://localhost:9292/register',
+		  url: 'http://localhost:9292/login',
 		  dataType:'json',
 		  data: data,
 		  success: function(json){
-		  	console.dir(json);
 		  	window.location.replace("/");
 		  },
 		  error: function(){
-		  	prependToContainer("Username taken");
+		  	prependToContainer("Username and password combination not found");
 		  }
 		});
 
@@ -42,6 +36,6 @@ $(function(){
 		flash+= text;
 		flash += "</div>";
 
-		$("#register-container").prepend(flash);
+		$("#login-container").prepend(flash);
 	}
 });

@@ -28,6 +28,15 @@
 		              <li ><a href="/register">Register</a></li>
 		              <li class="active" ><a href="/contact">Contact</a></li>
 		            </ul>
+		            <% if session[:name] != nil %>
+		            <ul class="nav navbar-nav pull-right">
+		                <li><a href="/logout">Logout</a></li>
+		            </ul>
+		            <% else %>
+		            <ul class="nav navbar-nav pull-right">
+		                <li><a href="/login">Login</a></li>
+		            </ul>
+		            <% end %>
 		          </div>
 		        </div>
 		    </div>
