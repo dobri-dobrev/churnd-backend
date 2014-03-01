@@ -12,6 +12,7 @@ end
 class Project
 	include Mongoid::Document
 	field :name, type: String
+	field :url, type: String
 	embedded_in :client
 	has_many :users
 	embeds_many :types

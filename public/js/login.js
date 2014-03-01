@@ -21,7 +21,7 @@ $(function(){
 		  dataType:'json',
 		  data: data,
 		  success: function(json){
-		  	window.location.replace("/project");
+		  	window.location.replace("http://localhost:9292/projects");
 		  },
 		  error: function(){
 		  	prependToContainer("Username and password combination not found");

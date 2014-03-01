@@ -16,11 +16,13 @@ each user contains records of interactions
 To deploy:
 localhost is hardcoded in register.js 
 localhost is hardcoded in login.js 
+localhost is hardcoded in createProject.js 
 localhost is hardcoded in mongoid.yml
 
 
 
 Known bugs:
+//add error message for validating the creation of a new project
 //need a better cookie secret that is linked to an ENV variable connect it to export for prod
 //need to implement password changing...
 //not doing email validation

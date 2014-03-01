@@ -5,7 +5,7 @@ require 'bcrypt'
 require './db.rb'
 # require 'mongo'
 
-['/hello', '/projects'].each do |path|
+['/hello', '/projects', '/new_project'].each do |path|
     before path do
         if session[:name] == nil
         	redirect '/login'
@@ -42,6 +42,18 @@ end
 
 get '/projects' do
 	erb :project
+end
+
+post '/new_project' do
+	puts params[:project_name]
+	if @current_client.projects.where(name: params[:project_name]).exists?
+		puts "project already exists"
+		return {:res => "exists"}.to_json
+	else
+		puts "created new project"
+		@current_client.projects.create(name: params[:project_name], url: params[:url])
+		return {:res => "win"}.to_json
+	end
 end
 
 get '/addproject' do
