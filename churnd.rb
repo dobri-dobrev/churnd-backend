@@ -30,7 +30,6 @@ get '/register' do
 end
 
 post '/register' do
-	puts params[:password]
 	password_salt = BCrypt::Engine.generate_salt
 	password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
 	Client.create(name: params[:name], email: params[:email], password_salt: password_salt, password_hash: password_hash)

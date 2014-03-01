@@ -27,6 +27,10 @@ $(function(){
 		  data: data,
 		  success: function(json){
 		  	console.dir(json);
+		  	window.location.replace("/blah");
+		  },
+		  error: function(){
+		  	prependToContainer("Internal Server Error");
 		  }
 		});
 
