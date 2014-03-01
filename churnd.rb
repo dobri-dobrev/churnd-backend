@@ -30,6 +30,14 @@ get '/register' do
 	erb :register
 end
 
+get '/project' do
+	erb :project
+end
+
+get '/addproject' do
+	erb :addproject
+end
+
 post '/register' do
 	if Client.where(name: params[:name]).exists?
 		halt 404
