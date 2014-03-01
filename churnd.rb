@@ -23,7 +23,6 @@ get '/registerNewCustomer' do
 end
 
 get '/' do
-	puts session[:name]
 	erb :index
 end
 
@@ -62,9 +61,7 @@ end
 
 post '/login' do
 	c = Client.where(name: params[:name]).to_a
-	puts params[:password]
 	if c.length==0
-		puts "wrong username"
 		halt 404
 	else
 		salt = c[0].password_salt
@@ -72,7 +69,6 @@ post '/login' do
 			session[:name]= params[:name] 
 			{ :result => 'good'}.to_json
 		else
-			puts "hash problem"
 			halt 404
 		end
 		
