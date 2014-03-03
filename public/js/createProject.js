@@ -24,7 +24,7 @@ $(function(){
 		  	}
 		  	else{
 		  		console.log("greaaaat success");
-		  		$('#firstModal').foundation('reveal', 'close');	
+		  		window.location.replace("/projects");
 		  	}
 		  	
 		  },

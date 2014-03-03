@@ -41,6 +41,7 @@ get '/register' do
 end
 
 get '/projects' do
+	@projects = @current_client.projects
 	erb :project
 end
 
@@ -89,7 +90,7 @@ get '/login' do
 	erb :login
 end
 
-post '/api/register_event'
+post '/api/register_event' do
 #unique id for project + email+ event name
 	{:key => "test"}.to_json
 end

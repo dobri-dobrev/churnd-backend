@@ -45,40 +45,10 @@
       </div>
     </div>
   </div>
- <div class="row">
-
-      <div class="large-6 small-6 columns">
-                <div class="panel">
-                  <div class="row">
-                    <div class="small-2 columns"><span>Project:</span></div>
-                    <div class="small-6 columns"><h7>Awesome Project 1</h7></div>
-                    <div class="small-4 columns"><a href="#" class="tiny radius button ">Show me more</a></div>
-                  </div>
-                  <div class="row">
-                    <div class="small-2 columns"><span>Key:</span></div>
-                    <div class="small-10 columns"><h7>Awesome Key 1</h7></div>
-                  </div>
-                </div>
-            </div>
-
-</div>
- <div class="row">
-
-      <div class="large-6 small-6 columns">
-                <div class="panel">
-                  <div class="row">
-                    <div class="small-2 columns"><span>Project:</span></div>
-                    <div class="small-6 columns"><h7>Awesome Project 1</h7></div>
-                    <div class="small-4 columns"><a href="#" class="tiny radius button ">Show me more</a></div>
-                  </div>
-                  <div class="row">
-                    <div class="small-2 columns"><span>Key:</span></div>
-                    <div class="small-10 columns"><h7>Awesome Key 1</h7></div>
-                  </div>
-                </div>
-            </div>
-
-</div>
+ 
+ <% for @proj in @projects %>
+  <%= erb :projectpartial %> 
+ <% end %>
 
 
 

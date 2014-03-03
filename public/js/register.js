@@ -26,7 +26,7 @@ $(function(){
 		  dataType:'json',
 		  data: data,
 		  success: function(json){
-		  	window.location.replace("http://localhost:9292/projects");
+		  	window.location.replace("/projects");
 		  },
 		  error: function(){
 		  	prependToContainer("Username taken");
