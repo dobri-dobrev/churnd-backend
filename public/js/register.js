@@ -23,7 +23,7 @@ $(function(){
 			errorArray[2]=5;
 			errFlag=1;
 		}
-		//console.log(errorArray);
+	//	console.log(errorArray);
 		if (errFlag)
 		{
 			prependToContainer(errorArray);
