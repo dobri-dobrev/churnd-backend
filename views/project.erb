@@ -11,16 +11,17 @@
   <nav class="top-bar" data-topbar="">
     <ul class="title-area">
       <li class="name">
-        <h1><a href="#">Churnd</a></h1>
+        <h1><a href="/">Churnd</a></h1>
       </li>
     </ul>
     <section class="top-bar-section">
       <!-- Right Nav Section -->
       <ul class="right show-for-large-up">
         <li class="has-dropdown not-click">
-          <a href="#">Armaan</a>
+          <a href="#"><%= session[:name] %></a>
           <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li>
             <li><a href="#">Account Details</a></li>
+             <li><a href="/logout">Log out</a></li>
           </ul>
         </li>
       </ul>
@@ -45,40 +46,10 @@
       </div>
     </div>
   </div>
- <div class="row">
-
-      <div class="large-6 small-6 columns">
-                <div class="panel">
-                  <div class="row">
-                    <div class="small-2 columns"><span>Project:</span></div>
-                    <div class="small-6 columns"><h7>Awesome Project 1</h7></div>
-                    <div class="small-4 columns"><a href="#" class="tiny radius button ">Show me more</a></div>
-                  </div>
-                  <div class="row">
-                    <div class="small-2 columns"><span>Key:</span></div>
-                    <div class="small-10 columns"><h7>Awesome Key 1</h7></div>
-                  </div>
-                </div>
-            </div>
-
-</div>
- <div class="row">
-
-      <div class="large-6 small-6 columns">
-                <div class="panel">
-                  <div class="row">
-                    <div class="small-2 columns"><span>Project:</span></div>
-                    <div class="small-6 columns"><h7>Awesome Project 1</h7></div>
-                    <div class="small-4 columns"><a href="#" class="tiny radius button ">Show me more</a></div>
-                  </div>
-                  <div class="row">
-                    <div class="small-2 columns"><span>Key:</span></div>
-                    <div class="small-10 columns"><h7>Awesome Key 1</h7></div>
-                  </div>
-                </div>
-            </div>
-
-</div>
+ 
+ <% for @proj in @projects %>
+  <%= erb :projectpartial %> 
+ <% end %>
 
 
 

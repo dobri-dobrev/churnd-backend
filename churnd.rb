@@ -5,6 +5,12 @@ require 'bcrypt'
 require './db.rb'
 # require 'mongo'
 
+configure do
+ 	Mongoid.load!("mongoid.yml")
+ 	use Rack::Session::Cookie, :secret => 'naigolemiqborec'
+end
+
+
 ['/hello', '/projects', '/new_project'].each do |path|
     before path do
         if session[:name] == nil
@@ -20,10 +26,48 @@ require './db.rb'
     end
 end
 
-configure do
- 	Mongoid.load!("mongoid.yml")
- 	use Rack::Session::Cookie, :secret => 'naigolemiqborec'
+before '/api/*' do
+	if params[:key]== nil
+		halt 404
+	else
+		p = Project.where(_id: params[:key]).to_a
+		if p.length == 0
+			halt 404
+		else
+			@current_project = p[0]
+		end	
+	end
 end
+
+#have to do empty field checking and email validation client side
+get '/api/register_user' do
+	if params[:email]==nil
+		halt 404
+	else
+		if @current_project.users.where(email: params[:email]).exists?
+			halt 200
+		else
+			if params[:name] == nil
+				params[:name] = 'anon'
+			end
+			@current_project.users.create(name: params[:name], email: params[:email])
+			halt 200
+		end
+	end
+	
+end
+
+post '/api/track' do
+	if params[:email] == nil || params[:type] == nil
+		halt 404
+	else
+		user = @current_project.users.where(email: params[:email]).first
+		user.interactions.create(type: params[:type], time: DateTime.now)
+		halt 200
+	end
+end
+
+
 
 
 get '/hello' do
@@ -41,11 +85,11 @@ get '/register' do
 end
 
 get '/projects' do
+	@projects = @current_client.projects
 	erb :project
 end
 
 post '/new_project' do
-	puts params[:project_name]
 	if @current_client.projects.where(name: params[:project_name]).exists?
 		puts "project already exists"
 		return {:res => "exists"}.to_json
@@ -89,7 +133,7 @@ get '/login' do
 	erb :login
 end
 
-post '/api/register_event'
+post '/api/register_event' do
 #unique id for project + email+ event name
 	{:key => "test"}.to_json
 end

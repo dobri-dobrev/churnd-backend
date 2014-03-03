@@ -6,14 +6,14 @@ class Client
 	field :email, type: String
 	field :password_salt, type: String
 	field :password_hash, type: String
-	embeds_many :projects
+	has_many :projects
 end
 
 class Project
 	include Mongoid::Document
 	field :name, type: String
 	field :url, type: String
-	embedded_in :client
+	belongs_to :client
 	has_many :users
 	embeds_many :types
 end
