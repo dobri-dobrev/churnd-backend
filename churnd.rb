@@ -61,7 +61,13 @@ post '/api/track' do
 	if params[:email] == nil || params[:type] == nil
 		halt 404
 	else
-		user = @current_project.users.where(email: params[:email]).first
+		users = @current_project.users.where(email: params[:email]).to_a
+		#register new user in case it does not exist
+		if users.length == 0
+			user = @current_project.users.create(name: 'anon', email: params[:email])
+		else
+			user = users[0]
+		end
 		user.interactions.create(type: params[:type], time: DateTime.now)
 		halt 200
 	end
