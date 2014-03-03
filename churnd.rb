@@ -40,7 +40,7 @@ before '/api/*' do
 end
 
 #have to do empty field checking and email validation client side
-get '/api/register_user' do
+post '/api/register_user' do
 	if params[:email]==nil
 		halt 404
 	else
