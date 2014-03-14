@@ -14,8 +14,17 @@ class Project
 	field :name, type: String
 	field :url, type: String
 	belongs_to :client
-	has_many :users
+	has_many :accounts
 	embeds_many :types
+end
+#think about expiration dates, etc
+class Account
+	include Mongoid::Document
+	field :name, type: String
+	field :value, type: Integer
+	has_many :users
+	belongs_to :project
+
 end
 
 class Type
@@ -29,7 +38,7 @@ class User
 	include Mongoid::Document
 	field :name, type: String
 	field :email, type: String
-	belongs_to :project
+	belongs_to :account
 	has_many :interactions
 end
 

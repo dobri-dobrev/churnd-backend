@@ -15,7 +15,7 @@ $(function(){
 		$.ajax({
 	      type: 'POST',
 	      accepts: "application/json",
-		  url: 'http://localhost:9292/new_project',
+		  url: '/new_project',
 		  dataType:'json',
 		  data: data,
 		  success: function(json){

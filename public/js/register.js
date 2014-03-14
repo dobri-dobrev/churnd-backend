@@ -42,11 +42,11 @@ $(function(){
 		$.ajax({
 	      type: 'POST',
 	      accepts: "application/json",
-		  url: 'http://localhost:9292/register',
+		  url: '/register',
 		  dataType:'json',
 		  data: data,
 		  success: function(json){
-		  	window.location.replace("/project");
+		  	window.location.replace("/projects");
 		  },
 		  error: function(){
 		  	prependToContainer(3);

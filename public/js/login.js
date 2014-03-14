@@ -37,7 +37,7 @@ $(function(){
 		$.ajax({
 	      type: 'POST',
 	      accepts: "application/json",
-		  url: 'http://localhost:9292/login',
+		  url: '/login',
 		  dataType:'json',
 		  data: data,
 		  success: function(json){

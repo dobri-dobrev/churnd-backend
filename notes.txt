@@ -14,10 +14,11 @@ each user contains records of interactions
 
 
 To deploy:
-localhost is hardcoded in register.js 
-localhost is hardcoded in login.js 
-localhost is hardcoded in createProject.js 
-localhost is hardcoded in mongoid.yml
+
+
+
+!!DO accounts which are user aggregations 
+accounts have acv, etc etc
 
 
 

@@ -7,7 +7,7 @@ require './db.rb'
 
 configure do
  	Mongoid.load!("mongoid.yml")
- 	use Rack::Session::Cookie, :secret => 'naigolemiqborec'
+ 	use Rack::Session::Cookie, :secret => ENV['CHURND_COOKIE_SECRET']
 end
 
 
