@@ -1,4 +1,4 @@
 
 
 var tracker = new Churnd('abcde');
-tracker.initialize(); 
+tracker.login("email","account"); 

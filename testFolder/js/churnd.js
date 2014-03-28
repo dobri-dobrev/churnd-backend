@@ -7,11 +7,25 @@ function Churnd(project_id) {
 
 Churnd.prototype.project_id = '';
 
-Churnd.prototype.initialize = function () {
-var url = "http://localhost:8080/frontend.html";
-	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-xmlhttp.open("POST", url);
-xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-xmlhttp.send(JSON.stringify({name:"John Rambo", time:"2pm"}));
+Churnd.prototype.login = function (email_id, account_name) {
+
+var sendData = JSON.stringify(
+	{
+		key: this.project_id, 
+		email: email_id,
+		account: account_name
+	};
+
+ $.ajax({
+        type: "POST",
+        url: "http://vast-savannah-8474.herokuapp.com/api/login",
+        data: sendData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(data){alert(data);},
+        failure: function(errMsg) {
+            alert(errMsg);
+        }
+  });
   
 };
