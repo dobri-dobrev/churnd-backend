@@ -13,39 +13,28 @@ class Project
 	include Mongoid::Document
 	field :name, type: String
 	field :url, type: String
+	field :interaction_types, type: Array
+	field :accoutns, type: Array
 	belongs_to :client
-	has_many :accounts
-	embeds_many :types
-end
-#think about expiration dates, etc
-class Account
-	include Mongoid::Document
-	field :name, type: String
-	field :value, type: Integer
-	has_many :users
-	belongs_to :project
-
 end
 
-class Type
-	include Mongoid::Document
-	field :name, type: String
-	field :html_id, type: String
-	embedded_in :project
-end
+
 
 class User
 	include Mongoid::Document
 	field :name, type: String
 	field :email, type: String
-	belongs_to :account
-	has_many :interactions
+	field :project_id, type: String
+	field :account, type: String
 end
 
 class Interaction
 	include Mongoid::Document
 	field :type, type: String
 	field :time, type: DateTime
+	field :email, type: String
+	field :project_id, type: String
+	field :account, type: String
 	belongs_to :user, dependent: :destroy
 end
 

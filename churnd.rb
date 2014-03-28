@@ -39,36 +39,38 @@ before '/api/*' do
 	end
 end
 
-#have to do empty field checking and email validation client side
-post '/api/register_user' do
-	if params[:email]==nil
+
+#needs to check if project has that account
+post '/api/login' do
+	if params[:email]==nil || params[:key] == nil || params[:account] == nil
 		halt 404
-	else
-		if @current_project.users.where(email: params[:email]).exists?
+	else 
+		if User.where(email: params[:email], project_id: params[:key], account_name: params[:account]).exists?
+			puts "user already exists"
 			halt 200
 		else
 			if params[:name] == nil
 				params[:name] = 'anon'
 			end
-			@current_project.users.create(name: params[:name], email: params[:email])
+			User.create(name: params[:name], email: params[:email], project_id: params[:key], account_name: params[:account])
+			puts "user created"
 			halt 200
 		end
 	end
 	
 end
 
+#needs to check if project has the type registered and the account
 post '/api/track' do
-	if params[:email] == nil || params[:type] == nil
+	if params[:email] == nil || params[:type] == nil || params[:key] == nil || params[:account] == nil
 		halt 404
 	else
-		users = @current_project.users.where(email: params[:email]).to_a
-		#register new user in case it does not exist
-		if users.length == 0
-			user = @current_project.users.create(name: 'anon', email: params[:email])
+		if User.where(email: params[:email], project_id: params[:key], account_name: params[:account]).exists?
+			Interaction.create(email: params[:email], project_id: params[:key], account_name: params[:account], type: params[:type], time: DateTime.now)
+			puts "created interaction"
 		else
-			user = users[0]
+			halt 404
 		end
-		user.interactions.create(type: params[:type], time: DateTime.now)
 		halt 200
 	end
 end

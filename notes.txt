@@ -1,10 +1,8 @@
 Launch mongo
 mongod --dbpath /Users/dobridobrev/Documents/programming/mongoData
 
-gems:
-'json'
-'securerandom'
-''
+Heroku RickArmaanDobri
+
 
 Mongo stuff
 dbname: churndDB
@@ -14,7 +12,7 @@ each user contains records of interactions
 
 
 To deploy:
-
+dobavi 6iban user i pass za bazata danni
 
 
 !!DO accounts which are user aggregations 
