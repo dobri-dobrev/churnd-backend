@@ -9,23 +9,26 @@ Churnd.prototype.project_id = '';
 
 Churnd.prototype.login = function (email_id, account_name) {
 
-var sendData = JSON.stringify(
+var sendData = 
 	{
 		key: this.project_id, 
-		email: email_id,
+		email: "blah",
 		account: account_name
 	};
-
- $.ajax({
-        type: "POST",
-        url: "http://vast-savannah-8474.herokuapp.com/api/login",
-        data: sendData,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function(data){alert(data);},
-        failure: function(errMsg) {
-            alert(errMsg);
-        }
-  });
+var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", "http://localhost:9292/api/login");
+xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp.send(JSON.stringify(sendData));
+ // $.ajax({
+ //        type: "POST",
+ //        url: "http://localhost:9292/api/login",
+ //        data: sendData,
+ //        accepts: "application/json",
+ //        dataType: "json",
+ //        success: function(data){alert(data);},
+ //        failure: function(errMsg) {
+ //            alert(errMsg);
+ //        }
+ //  });
   
 };

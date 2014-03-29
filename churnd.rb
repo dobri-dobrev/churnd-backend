@@ -6,6 +6,7 @@ require './db.rb'
 # require 'mongo'
 
 configure do
+	set :protection, :except => [:json_csrf]
  	Mongoid.load!("mongoid.yml")
  	use Rack::Session::Cookie, :secret => ENV['CHURND_COOKIE_SECRET']
 end
@@ -25,25 +26,35 @@ end
         end
     end
 end
-
-before '/api/*' do
-	if params[:key]== nil
-		halt 404
-	else
-		p = Project.where(_id: params[:key]).to_a
-		if p.length == 0
-			halt 404
-		else
-			@current_project = p[0]
-		end	
-	end
+options '/api/*' do
+  response.headers["Access-Control-Allow-Origin"] = "*"
+  response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+  response.headers["Access-Control-Allow-Methods"] = "POST"
+  halt 200
 end
+
+#need to make sure this is just for post and not OPTIONS
+# before '/api/*' do
+# 	if params[:key]== nil
+# 		halt 404
+# 	else
+# 		p = Project.where(_id: params[:key]).to_a
+# 		if p.length == 0
+# 			halt 404
+# 		else
+# 			@current_project = p[0]
+# 		end	
+# 	end
+# end
 
 
 #needs to check if project has that account
 post '/api/login' do
+	puts params.inspect
+
+	response.headers["Access-Control-Allow-Origin"] = "*"
 	if params[:email]==nil || params[:key] == nil || params[:account] == nil
-		halt 404
+		halt 200
 	else 
 		if User.where(email: params[:email], project_id: params[:key], account_name: params[:account]).exists?
 			puts "user already exists"
