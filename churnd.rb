@@ -56,10 +56,6 @@ end
 
 #needs to check if project has that account
 post '/api/login' do
-	# puts request.body.read
-	# @json = JSON.parse(request.body.read)
-	# puts @json.inspect
-
 	response.headers["Access-Control-Allow-Origin"] = "*"
 	if @json_call_params['email']==nil || @json_call_params['key'] == nil || @json_call_params['account'] == nil
 		halt 404
@@ -81,16 +77,18 @@ end
 
 #needs to check if project has the type registered and the account
 post '/api/track' do
-	if params[:email] == nil || params[:type] == nil || params[:key] == nil || params[:account] == nil
+	response.headers["Access-Control-Allow-Origin"] = "*"
+	if @json_call_params['email'] == nil || @json_call_params['type'] == nil || @json_call_params['key'] == nil || @json_call_params['account'] == nil
 		halt 404
 	else
-		if User.where(email: params[:email], project_id: params[:key], account_name: params[:account]).exists?
-			Interaction.create(email: params[:email], project_id: params[:key], account_name: params[:account], type: params[:type], time: DateTime.now)
+		if User.where(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account']).exists?
+			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account'], type: @json_call_params['type'], time: DateTime.now)
 			puts "created interaction"
+			halt 200
 		else
 			halt 404
 		end
-		halt 200
+		
 	end
 end
 
