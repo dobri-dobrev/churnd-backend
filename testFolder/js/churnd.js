@@ -47,17 +47,35 @@ Churnd.prototype.login = function (email_id, account_name) {
 };
 
 
-Churnd.prototype.track = function (email_id, interaction_type) {
+Churnd.prototype.track = function (email_id, interaction_type, account_name) {
 
     var sendData = 
         {
             key: this.project_id, 
             email: email_id,
-            interaction: interaction_type
+            type: interaction_type,
+            account: account_name
         };
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
     xmlhttp.open("POST", "http://localhost:9292/api/track");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify(sendData));
   
+};
+
+Churnd.prototype.logout = function(email_id, account_name) {
+
+
+    var sendData = 
+        {
+            key: this.project_id, 
+            email: email_id,
+            account: account_name
+        };
+    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+    xmlhttp.open("POST", "http://localhost:9292/api/logout");
+    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.send(JSON.stringify(sendData));
+
+
 };
