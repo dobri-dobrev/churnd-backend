@@ -92,6 +92,21 @@ post '/api/track' do
 	end
 end
 
+post '/api/logout' do
+	response.headers["Access-Control-Allow-Origin"] = "*"
+	if @json_call_params['email'] == nil || @json_call_params['key'] == nil || @json_call_params['account'] == nil
+		halt 404
+	else
+		if User.where(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account']).exists?
+			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account'], type: "logout", time: DateTime.now)
+			puts "logout recorded"
+			halt 200
+		else
+			halt 404
+		end
+		
+	end
+end
 
 
 
