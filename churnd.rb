@@ -6,7 +6,7 @@ require './db.rb'
 # require 'mongo'
 
 configure do
-	set :protection, :except => [:json_csrf]
+	set :protection, :except => [:http_origin]
  	Mongoid.load!("mongoid.yml")
  	use Rack::Session::Cookie, :secret => ENV['CHURND_COOKIE_SECRET']
 end
@@ -30,41 +30,48 @@ options '/api/*' do
   response.headers["Access-Control-Allow-Origin"] = "*"
   response.headers["Access-Control-Allow-Headers"] = "Content-Type"
   response.headers["Access-Control-Allow-Methods"] = "POST"
-  halt 200
+  
 end
 
 #need to make sure this is just for post and not OPTIONS
-# before '/api/*' do
-# 	if params[:key]== nil
-# 		halt 404
-# 	else
-# 		p = Project.where(_id: params[:key]).to_a
-# 		if p.length == 0
-# 			halt 404
-# 		else
-# 			@current_project = p[0]
-# 		end	
-# 	end
-# end
+before '/api/*' do
+	if request.request_method == "POST"
+		@json_call_params = JSON.parse(request.body.read)
+		puts @json_call_params.inspect
+		puts @json_call_params['key']
+		if @json_call_params['key'] == nil
+			halt 404
+		else
+			p = Project.where(_id: @json_call_params['key']).to_a
+			if p.length == 0
+				halt 404
+			else
+				@current_project = p[0]
+				puts @current_project.name
+			end	
+		end
+	end
+end
 
 
 #needs to check if project has that account
 post '/api/login' do
-	@json = JSON.parse(request.body.read)
-	puts @json.inspect
+	# puts request.body.read
+	# @json = JSON.parse(request.body.read)
+	# puts @json.inspect
 
 	response.headers["Access-Control-Allow-Origin"] = "*"
-	if params[:email]==nil || params[:key] == nil || params[:account] == nil
-		halt 200
+	if @json_call_params['email']==nil || @json_call_params['key'] == nil || @json_call_params['account'] == nil
+		halt 404
 	else 
-		if User.where(email: params[:email], project_id: params[:key], account_name: params[:account]).exists?
+		if User.where(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account']).exists?
 			puts "user already exists"
 			halt 200
 		else
-			if params[:name] == nil
-				params[:name] = 'anon'
+			if @json_call_params['name'] == nil
+				@json_call_params['name'] = 'anon'
 			end
-			User.create(name: params[:name], email: params[:email], project_id: params[:key], account_name: params[:account])
+			User.create(name: @json_call_params['name'], email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account'])
 			puts "user created"
 			halt 200
 		end

@@ -11,9 +11,9 @@ Churnd.prototype.login = function (email_id, account_name) {
 
     var sendData = 
     	{
-    		key: this.project_id, 
     		email: "blah",
-    		account: account_name
+    		account: account_name,
+            key: "5314182e2a0b6479c7000002"
     	};
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
     xmlhttp.open("POST", "http://localhost:9292/api/login");
