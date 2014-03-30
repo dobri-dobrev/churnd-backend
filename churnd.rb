@@ -50,7 +50,8 @@ end
 
 #needs to check if project has that account
 post '/api/login' do
-	puts params.inspect
+	@json = JSON.parse(request.body.read)
+	puts @json.inspect
 
 	response.headers["Access-Control-Allow-Origin"] = "*"
 	if params[:email]==nil || params[:key] == nil || params[:account] == nil
