@@ -22,9 +22,11 @@ Features to add:
 
 handle api errors in the backend (Dobri)
 on success and on error functions in churnd.js
+clean up and minimize churnd.js to make it exportable
+add a place where we can download churnd.js from
 add link to projects on main page if user logged in (in index.erb)
-//delete projects (frontend and backend) (Dobri in progress)
-delete account (frontend and backend)
+//delete projects (frontend and backend) (Dobri )
+//delete account (frontend and backend) (Dobri)
 view users in account as list (frontend and backend)
 front page design (frontend)
 change password workflow (frontend and backend)
