@@ -35,4 +35,9 @@ $(function(){
 
 		
 	});
+
+	$(".show-me-more-button").click(function(event){
+		
+		window.location.replace("/expanded_project?"+"project_id="+$(this).data('id'));
+	});
 });
