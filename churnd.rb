@@ -110,11 +110,7 @@ end
 
 
 
-get '/hello' do
-	puts @current_client.name
-	content_type :json
-	{ :key1 => 'value1', :key2 => 'value2' }.to_json
-end	
+
 
 get '/' do
 	erb :index
@@ -135,7 +131,7 @@ post '/new_project' do
 		return {:res => "exists"}.to_json
 	else
 		puts "created new project"
-		@current_client.projects.create(name: params[:project_name], url: params[:url])
+		@current_client.projects.create(name: params[:project_name], url: params[:url], accounts: [], interaction_types: [])
 		return {:res => "win"}.to_json
 	end
 end
@@ -160,6 +156,16 @@ post '/register' do
 	
 end
 
+get '/expanded_project' do
+	projects = Project.where(_id: params[:project_id]).to_a
+	if projects.length == 0
+		halt 404
+	else
+		@project_to_view = projects[0]
+		erb :account
+	end
+end
+
 get '/contact' do
 	erb :contact
 end
@@ -173,10 +179,7 @@ get '/login' do
 	erb :login
 end
 
-post '/api/register_event' do
-#unique id for project + email+ event name
-	{:key => "test"}.to_json
-end
+
 
 post '/login' do
 	c = Client.where(name: params[:name]).to_a
