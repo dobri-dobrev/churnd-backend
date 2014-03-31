@@ -7,7 +7,7 @@ $(function(){
 		}
 		data = {};
 		data['account_name'] = $("#account_create_name_field").val();
-		data['project_id'] = $this.data('projectid');
+		data['project_id'] = $(this).data('projectid');
 	//	data['url'] = $("#project_create_url_field").val();
 		$.ajax({
 	      type: 'POST',
@@ -18,11 +18,11 @@ $(function(){
 		  success: function(json){
 		  	if(json.res == "exists"){
 		  		console.log("account already exists");
-		  		window.location.replace("/expanded_project?" + "project_id=" + $this.data('projectid'));
+		  		window.location.replace("/expanded_project?" + "project_id=" + data['project_id']);
 		  	}
 		  	else{
 		  		console.log("greaaaat success");
-		  		window.location.replace("/expanded_project?" + "project_id=" + $this.data('projectid'));
+		  		window.location.replace("/expanded_project?" + "project_id=" + data['project_id']);
 		  	}
 		  	
 		  },

@@ -165,14 +165,14 @@ get '/expanded_project' do
 		erb :account
 	end
 end
-post 'new_account' do
+post '/new_account' do
 	projects = Project.where(_id: params[:project_id]).to_a
 	if projects.length == 0
 		halt 404
 	else
 		@project_to_add_to = projects[0]
 		@project_to_add_to.accounts << params[:account_name]
-		halt 200
+		{:ret => 'win'}.to_json
 	end
 end
 
