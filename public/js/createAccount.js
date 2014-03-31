@@ -33,4 +33,26 @@ $(function(){
 
 		
 	});
+
+	$(".delete-account-button").click(function(event){
+		data = {};
+		data['project_id'] = $(this).data('id');
+		data['account_name'] = $(this).data('accname');
+		$.ajax({
+	      type: 'POST',
+	      accepts: "application/json",
+		  url: '/delete_account',
+		  dataType:'json',
+		  data: data,
+		  success: function(json){
+		  	window.location.replace("/expanded_project?" + "project_id=" + data['project_id']);
+		  },
+		  error: function(){
+		  	console.log("internal server error");
+		  	window.location.replace("/expanded_project?" + "project_id=" + data['project_id']);
+		  }
+		});
+
+		
+	});
 });

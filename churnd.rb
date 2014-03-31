@@ -142,9 +142,6 @@ post '/delete_project' do
 	halt 200
 end
 
-get '/addproject' do
-	erb :addproject
-end
 
 post '/register' do
 	if Client.where(name: params[:name]).exists?
@@ -177,10 +174,21 @@ post '/new_account' do
 		halt 404
 	else
 		@project_to_add_to = projects[0]
-		puts params[:account_name]
-		@project_to_add_to.accounts << params[:account_name]
+		@project_to_add_to.accounts << params[:account_name] unless @project_to_add_to.accounts.include?(params[:account_name]) 
 		@project_to_add_to.save
 		{:ret => 'win'}.to_json
+	end
+end
+
+post '/delete_account' do
+	projects = Project.where(_id: params[:project_id]).to_a
+	if projects.length == 0
+		halt 404
+	else
+		@project_to_add_to = projects[0]
+		@project_to_add_to.accounts.delete(params[:account_name])
+		@project_to_add_to.save
+		halt 200
 	end
 end
 
