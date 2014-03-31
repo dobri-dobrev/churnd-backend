@@ -19,6 +19,8 @@ dobavi 6iban user i pass za bazata danni
 
 Features to add:
 
+handle api errors in the backend (Dobri)
+on success and on error functions in churnd.js
 add link to projects on main page if user logged in (in index.erb)
 delete projects (frontend and backend)
 delete account (frontend and backend)
