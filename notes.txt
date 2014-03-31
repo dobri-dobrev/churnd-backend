@@ -9,17 +9,23 @@ Heroku RickArmaanDobri
 Mongo stuff
 dbname: churndDB
 
-customer has many users
-each user contains records of interactions
+
 
 
 To deploy:
 dobavi 6iban user i pass za bazata danni
 
 
-!!DO accounts which are user aggregations 
-accounts have acv, etc etc
 
+Features to add:
+
+add link to projects on main page if user logged in (in index.erb)
+delete projects (frontend and backend)
+delete account (frontend and backend)
+view users in account as list (frontend and backend)
+front page design (frontend)
+change password workflow (frontend and backend)
+forgotten password workflow (frontend and backend)
 
 
 Known bugs:
@@ -28,4 +34,3 @@ Known bugs:
 //need a better cookie secret that is linked to an ENV variable connect it to export for prod
 //need to implement password changing...
 //not doing email validation
-//think about displaying session[:name] in header of views

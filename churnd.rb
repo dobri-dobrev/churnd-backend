@@ -171,7 +171,9 @@ post '/new_account' do
 		halt 404
 	else
 		@project_to_add_to = projects[0]
+		puts params[:account_name]
 		@project_to_add_to.accounts << params[:account_name]
+		@project_to_add_to.save
 		{:ret => 'win'}.to_json
 	end
 end
