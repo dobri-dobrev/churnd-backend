@@ -31,7 +31,7 @@ view users in account as list (frontend and backend)
 front page design (frontend)
 change password workflow (frontend and backend)
 forgotten password workflow (frontend and backend)
-
+think about adding Google Analitycs or our own shit for tracking
 
 Known bugs:
 add checking and response in case an account already exists
