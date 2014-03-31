@@ -14,7 +14,7 @@ class Project
 	field :name, type: String
 	field :url, type: String
 	field :interaction_types, type: Array
-	field :accoutns, type: Array
+	field :accounts, type: Array
 	belongs_to :client
 end
 

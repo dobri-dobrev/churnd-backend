@@ -1,6 +1,8 @@
 Launch mongo
 mongod --dbpath /Users/dobridobrev/Documents/programming/mongoData
 
+delete expandedaccounts.erb
+
 Heroku RickArmaanDobri
 
 
@@ -21,6 +23,7 @@ accounts have acv, etc etc
 
 
 Known bugs:
+// add checking and response in case an account already exists
 //add error message for validating the creation of a new project
 //need a better cookie secret that is linked to an ENV variable connect it to export for prod
 //need to implement password changing...
