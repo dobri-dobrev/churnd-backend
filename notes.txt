@@ -21,17 +21,19 @@ Features to add:
 // means done
 
 handle api errors in the backend (Dobri)
+read up on sidekiq and start setting up a background job to write statistics
 on success and on error functions in churnd.js
 clean up and minimize churnd.js to make it exportable
 add a place where we can download churnd.js from
 add link to projects on main page if user logged in (in index.erb)
-//delete projects (frontend and backend) (Dobri )
-//delete account (frontend and backend) (Dobri)
 view users in account as list (frontend and backend)
 front page design (frontend)
 change password workflow (frontend and backend)
 forgotten password workflow (frontend and backend)
 think about adding Google Analitycs or our own shit for tracking
+//delete projects (frontend and backend) (Dobri )
+//delete account (frontend and backend) (Dobri)
+//set up procfile to allow multiple workers
 
 Known bugs:
 add checking and response in case an account already exists
