@@ -136,6 +136,12 @@ post '/new_project' do
 	end
 end
 
+post '/delete_project' do
+	puts params[:project_id]
+	Project.where(_id: params[:project_id]).delete
+	halt 200
+end
+
 get '/addproject' do
 	erb :addproject
 end

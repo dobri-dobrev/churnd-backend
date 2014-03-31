@@ -40,4 +40,25 @@ $(function(){
 		
 		window.location.replace("/expanded_project?"+"project_id="+$(this).data('id'));
 	});
+
+	$(".delete-project-button").click(function(event){
+		data = {};
+		data['project_id'] = $(this).data('id');
+		$.ajax({
+	      type: 'POST',
+	      accepts: "application/json",
+		  url: '/delete_project',
+		  dataType:'json',
+		  data: data,
+		  success: function(json){
+		  	window.location.replace("/projects");
+		  },
+		  error: function(){
+		  	console.log("internal server error");
+		  	window.location.replace("/projects");
+		  }
+		});
+
+		
+	});
 });
