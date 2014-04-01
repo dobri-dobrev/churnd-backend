@@ -33,7 +33,9 @@ forgotten password workflow (frontend and backend)
 think about adding Google Analitycs or our own shit for tracking
 //delete projects (frontend and backend) (Dobri )
 //delete account (frontend and backend) (Dobri)
-//set up procfile to allow multiple workers
+//set up procfile to allow multiple workers (Dobri)
+// add project name to the project expanded view (Dobri)
+
 
 Known bugs:
 add checking and response in case an account already exists
