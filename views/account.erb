@@ -15,6 +15,27 @@
       </li>
     </ul>
     <section class="top-bar-section">
+
+      <!-- Left Nav Section -->
+           <ul class="left">
+        <li class="divider"></li>
+        <li><a href="/">Home</a></li>
+        <li class="divider"></li>
+
+        <% if session[:name] != nil %>
+
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li class="divider"></li>
+        <li><a href="/contact">Contact</a></li>
+        <li class="divider"></li>
+        <% else %>
+        <li><a href="/register">Register</a></li>
+        <li class="divider"></li>
+        <li><a href="/contact">Contact</a></li>
+
+        <% end %>
+
+      </ul>
       <!-- Right Nav Section -->
       <ul class="right show-for-large-up">
         <li class="has-dropdown not-click">
@@ -77,6 +98,31 @@
     <!-- <p><a href="#" data-reveal-id="secondModal" class="secondary button">Second Modal...</a></p> -->
   <a class="close-reveal-modal">&#215;</a>
 </div>
+
+
+<div id="interactionModal" class="reveal-modal" data-reveal>
+
+<h2>Create New Interaction</h2>
+ <form> 
+  <!-- Row 1 -->
+  <div class="row"> <div class="small-8">  <div class="row">
+    <div class="small-3 columns">  <label for="right-label" class="right inline">Interaction Name:</label>  </div> 
+    <div class="small-9 columns"> <input id="account_create_name_field" type="text" id="right-label" placeholder="Enter Name"> </div>
+  </div>  </div> </div>
+
+
+
+  <div class="row"> <div class="small-8">  <div class="row">
+  <a href="#" id="account_create_submit_button" data-projectid="<%=@project_to_view._id %>" class="radius button right">Submit</a>
+  </div>  </div> </div>
+
+
+</form>
+    <!-- <p><a href="#" data-reveal-id="secondModal" class="secondary button">Second Modal...</a></p> -->
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+
 
   <!-- Footer -->
   

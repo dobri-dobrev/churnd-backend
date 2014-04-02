@@ -31,9 +31,19 @@
         <li class="divider"></li>
         <li><a href="/">Home</a></li>
         <li class="divider"></li>
+
+        <% if session[:name] != nil %>
+
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li class="divider"></li>
+<!--         <li><a href="/contact">Contact</a></li> -->
+
+        <% else %>
         <li><a href="/register">Register</a></li>
         <li class="divider"></li>
         <li><a href="/contact">Contact</a></li>
+
+        <% end %>
 
       </ul>
 
@@ -73,7 +83,7 @@
 
                  <form>
           <fieldset>
-          <legend>Register</legend> 
+          <legend>Login</legend> 
   <div class="row">
 
     <div id="lnf-1" class="large-12 columns ">

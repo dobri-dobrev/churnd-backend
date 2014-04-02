@@ -26,17 +26,7 @@ Churnd.prototype.login = function (email_id, account_name) {
           console.log('xhr.readyState=',xhr.readyState);
           console.log('xhr.status=',xhr.status);
           console.log('response=',xhr.responseText);
-
-          // var data = $.parseJSON(xhr.responseText);
-          // var uploadResult = data['message']
-          // console.log('uploadResult=',uploadResult);
-
-          // if (uploadResult=='failure'){
-          //    console.log('failed to upload file');
-          //    displayError('failed to upload');
-          // }else if (uploadResult=='success'){
-          //    console.log('successfully uploaded file');
-          // }
+          // TBD
        }
        else
        {

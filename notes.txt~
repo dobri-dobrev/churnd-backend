@@ -22,10 +22,10 @@ Features to add:
 
 handle api errors in the backend (Dobri)
 read up on sidekiq and start setting up a background job to write statistics
-//(what action to perform) on success and on error functions in churnd.js (Armaan)
-//clean up and minimize churnd.js to make it exportable (Armaan)
-//add a place where we can download churnd.js from (Armaan)
-//add link to projects on main page if user logged in (in index.erb) (Armaan)
+on success and on error functions in churnd.js (Armaan)
+clean up and minimize churnd.js to make it exportable (Armaan)
+add a place where we can download churnd.js from (Armaan)
+add link to projects on main page if user logged in (in index.erb) (Armaan)
 view users in account as list (frontend and backend) (Armaan)
 front page design (frontend) (Armaan)
 change password workflow (frontend and backend)

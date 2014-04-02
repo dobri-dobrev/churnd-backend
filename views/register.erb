@@ -33,9 +33,19 @@
         <li class="divider"></li>
         <li><a href="/">Home</a></li>
         <li class="divider"></li>
+
+        <% if session[:name] != nil %>
+
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li class="divider"></li>
+<!--         <li><a href="/contact">Contact</a></li> -->
+
+        <% else %>
         <li><a href="/register">Register</a></li>
         <li class="divider"></li>
         <li><a href="/contact">Contact</a></li>
+
+        <% end %>
 
       </ul>
 
@@ -58,6 +68,7 @@
       <!-- End Navs -->
     </section>
   </nav>
+
 
   <div class="row">
     <div class="large-6 columns">

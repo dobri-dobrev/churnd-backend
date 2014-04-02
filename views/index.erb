@@ -11,12 +11,25 @@
 		    }*/
 		</style>-->
 
+        <style type="text/css">
+
+    .example-orbit img {
+  width: 100%;
+  height: auto;
+}
+
+
+    </style>
+
 		<link rel="stylesheet" href="css/foundation.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
  		<script src="js/vendor/modernizr.js"></script>
+    <script src="js/foundation.min.js"></script>
 
 	</head>
 	<body>
-
+<div class="fixed">
 <nav class="top-bar" data-topbar="">
     <ul class="title-area">
       <li class="name">
@@ -28,13 +41,23 @@
     <section class="top-bar-section">
 
       <!-- Left Nav Section -->
-      <ul class="left">
-      	<li class="divider"></li>
-      	<li><a href="/">Home</a></li>
-      	<li class="divider"></li>
-      	<li><a href="/register">Register</a></li>
-      	<li class="divider"></li>
-      	<li><a href="/contact">Contact</a></li>
+           <ul class="left">
+        <li class="divider"></li>
+        <li><a href="/">Home</a></li>
+        <li class="divider"></li>
+
+        <% if session[:name] != nil %>
+
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li class="divider"></li>
+        <li><a href="/contact">Contact</a></li>
+        <li class="divider"></li>
+        <% else %>
+        <li><a href="/register">Register</a></li>
+        <li class="divider"></li>
+        <li><a href="/contact">Contact</a></li>
+
+        <% end %>
 
       </ul>
 
@@ -57,12 +80,61 @@
       <!-- End Navs -->
     </section>
   </nav>
+  </div>
+
+<ul class="example-orbit" data-orbit>
+  <li>
+    <img src="img/logo.jpg" alt="slide 1" />
+    <div class="orbit-caption text-center">
+      <div class="row">
+         <a href="#" class="radius button">Sign up Now!</a>
+      </div>
+    </div>
+  </li>
+  <li>
+    <img src="http://placehold.it/1000x300/EE964D/fff" alt="slide 2" />
+    <div class="orbit-caption">
+      Caption Two.
+    </div>
+  </li>
+  <li>
+    <img src="http://placehold.it/1000x300/FDC43D/fff" alt="slide 3" />
+    <div class="orbit-caption">
+      Caption Three.
+    </div>
+  </li>
+</ul>
+  
+
+
+<!-- Three-up Content Blocks -->
 
   <div class="row">
-    <div class="large-12 columns">
-      <img src="http://placehold.it/1600x600&text=Header"><br><br>
+    <div class="large-4 columns">
+      <h4>User Tracking</h4>
+      <p>Churnd tracks individual and group usage behavior to determine density and frequency of behavior across individual software features.</p>
     </div>
-  </div>
+    
+    <div class="large-4 columns">
+      <h4>Predictive Analytics</h4>
+      <p>Churnd’s algorithm leverage trend analysis of user behavior to identify the likelihood of customer churn, as well as the likely reason for retention.</p>
+    </div>
+    
+    <div class="large-4 columns">
+      <h4>Retention Automation</h4>
+      <p>Churnd automates retention functions based on client-specified churn triggers.</p>
+    </div>
+  
+    </div>
+
+    <div class="row">
+
+<div class="small-2 small-centered columns">
+ <h3> <a href="http://localhost:8000/js/churnd.min.js" target="_blank" class="radius button success">Download Now!</a></h3>
+</div>
+
+    </div>
+
 
     <!-- Footer -->
   
@@ -82,8 +154,10 @@
       </div>
     </div> 
   </footer>
-
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+          <script>
+  $(document).foundation();
+  var doc = document.documentElement;
+  doc.setAttribute('data-useragent', navigator.userAgent);
+  </script>
 	</body>
 </html>
