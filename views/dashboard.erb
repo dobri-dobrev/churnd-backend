@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Dashboard</title>
+  <link rel="stylesheet" href="css/foundation.css" />
+  <script src="js/vendor/modernizr.js"></script>
+</head>
+<body>
+<div class="fixed">
+<nav class="top-bar" data-topbar="">
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="/">Churnd</a></h1>
+      </li>
+      <!-- For mobile devices -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <!-- Left Nav Section -->
+      <ul class="left">
+        <li class="divider"></li>
+        <li class="active"><a href="/account">Dashboard</a></li>
+        <li class="divider"></li>
+        <li><a href="/campaign">Campaign</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Actions</a></li>
+
+      </ul>
+
+      <!-- Right Nav Section -->
+      <ul class="right show-for-large-up">
+        <!-- <li class="has-dropdown not-click"> -->
+        <% if session[:name] != nil %>
+        <li>
+          <a href="/logout">Logout</a>
+<!--            <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li>
+            <li><a href="#">Account Details</a></li>
+          </ul> -->
+        </li> 
+        <% else %>
+        <li>
+          <a href="/">Logout</a>
+        </li>
+        <% end %>
+      </ul>
+      <!-- End Navs -->
+    </section>
+  </nav>
+</div>
+
+  <div class="row">
+      <div class="large-12 columns">
+        <div class="panel">
+          <h4>FaceGramSquareApp</h4>
+          <div class="row">
+            <div class="large-9 columns">
+              <p>Welcome back!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+  <div class="row">
+    <div class="large-6 columns">
+      <fieldset>
+      <legend> Retention Rate </legend>
+      <div id="placeholder" style="width:400px;height:300px"></div>
+      </fieldset>
+    </div>
+    <div class="large-6 columns">
+      <fieldset>
+      <legend> Risk Profile </legend>
+      <div id="retention_chart" style="width:500px;height:350px"> </div>
+    </fieldset>
+    </div>
+  </div>
+
+    <br>
+  <br>
+  <div class="row">
+<div class ="large-8 columns">
+  <div class="panel radius">
+    <table>
+  <thead>
+    <tr>
+      <th width="200">Account</th>
+      <th>ACV</th>
+      <th width="150"># of Users</th>
+      <th width="150">Retention Risk</th>
+      <th width="150">Priority</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+     
+      <td> <a href="/campaign">InstaApp </a></td>
+
+      <td>80,000</td>
+      <td>300</td>
+      <td>6%</td>
+      <td>87</td>
+    </tr>
+    <tr>
+      <td> <a href="/campaign"> SnapBird </a></td>
+      <td>125,000</td>
+      <td>530</td>
+      <td>11%</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <td> <a href="/campaign"> TwitSquare </a></td>
+      <td>35,000</td>
+      <td>465</td>
+      <td>28%</td>
+      <td>76</td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+  </div>
+
+
+<div class="large-4 columns hide-for-small">
+        <h4>Want More?</h4>
+        <hr>
+        <a href="#">
+        <div style="text-align: center" class="panel radius callout">
+          <strong>Add some :)</strong>
+        </div></a> <a href="#">
+      </div>
+
+
+  </div>
+
+      <!-- Footer -->
+  
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr />
+      <div class="row">
+        <div class="large-6 columns">
+          <p>&copy; Copyright Churnd</p>
+        </div>
+        <div class="large-6 columns">
+          <ul class="inline-list right">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div> 
+  </footer>
+
+</body>
+
+<script src="js/vendor/jquery.js"></script>
+  <script src="js/foundation.min.js"></script>
+  <script src="js/jquery.flot.min.js"></script>
+  <script src="js/jquery.flot.axislabels.js"></script>
+  <script src="js/jquery.flot.pie.js"></script>
+  <script src="js/jquery.flot.navigate.min.js"></script>
+  <script src="js/index.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script>
+  $(document).foundation();
+
+  var doc = document.documentElement;
+  doc.setAttribute('data-useragent', navigator.userAgent);
+  </script>
+</body>
+</html>
