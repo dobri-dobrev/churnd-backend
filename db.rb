@@ -15,6 +15,7 @@ class Project
 	field :url, type: String
 	field :interaction_types, type: Array
 	field :accounts, type: Array
+	field :account_data, type: Hash
 	belongs_to :client
 end
 
@@ -37,4 +38,3 @@ class Interaction
 	field :account, type: String
 	belongs_to :user, dependent: :destroy
 end
-
