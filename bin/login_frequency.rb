@@ -3,42 +3,55 @@ require 'active_support/all'
 Mongoid.load!("mongoid.yml", :development)
 
 def calculate_login_frequency(proj)
+	account_count = 0.0
+	account_average = 0.0
+	account_data = proj.account_data
 	for acc in proj.accounts
+		account_count += 1.0
 		users = User.where(project_id: proj._id, account: acc)
+		user_count = 0.0
+		user_average = 0.0
 		for user in users
-			counter = 0
+			user_count +=1.0
+			login_counter = 0.0
 			logins = Interaction.where(project_id: proj._id, account: acc, email: user.email, type: "login", :time.gte => (DateTime.now-7.days))
 			for log in logins
-				counter += 1
+				login_counter += 1.0
 			end
-			#persist counts 
-			puts user.name + " "+ counter.to_s
+			user.weekly_login_rate = login_counter
+			user.save
+			user_average += login_counter
 		end
+		if user_count > 0.0
+			user_average = user_average/user_count
+		else
+			user_average = 0.0
+		end
+		if account_data.has_key?(acc)
+			account_data[acc][:weekly_login_rate] = user_average
+		else
+			account_data[acc] = {:weekly_login_rate => user_average}
+		end
+		account_average += user_average
+		
 	end
+	if account_average>0.0
+		account_average = account_average/account_count
+	else
+		account_average = 0.0
+	end
+	proj.account_data = account_data
+	proj.weekly_login_rate = account_average
+	proj.save
+	puts "project average is " + proj.weekly_login_rate.to_s
 	
 end
 
-puts "Start"
+puts "Start Calculating Login Frequency"
 
-# projects = []
-
-# Project.all.each do |proj|
-# 	projects << proj
-# end
-
-# for p in projects
-# 	calculate_login_frequency(p)
-# end
-
-pr = Project.where(name: "Project 1").to_a[0]
-calculate_login_frequency(pr)
+Project.all.each do |proj|
+	calculate_login_frequency(proj)
+end
 
 
-#needs to create account data objects for accounts if they do not exist anymore!!!
-
-
-# for i in 0..5
-#    user_List << User.create(name: "User #{i}", email: "email#{i}@gmail.com", project_id: "Project #{i}", account_name: "Account #{i}")
-# end
-
-puts "done"
+puts "Done calculating Login Frequency"

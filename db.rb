@@ -16,6 +16,7 @@ class Project
 	field :interaction_types, type: Array
 	field :accounts, type: Array
 	field :account_data, type: Hash
+	field :weekly_login_rate, type: Float
 	belongs_to :client
 end
 
@@ -27,6 +28,7 @@ class User
 	field :email, type: String
 	field :project_id, type: String
 	field :account, type: String
+	field :weekly_login_rate, type: Float
 end
 
 class Interaction
