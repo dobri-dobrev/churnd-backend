@@ -12,7 +12,7 @@ $(function(){
 		$.ajax({
 	      type: 'POST',
 	      accepts: "application/json",
-		  url: '/new_account',
+		  url: '/new_interaction',
 		  dataType:'json',
 		  data: data,
 		  success: function(json){
@@ -41,7 +41,7 @@ $(function(){
 		$.ajax({
 	      type: 'POST',
 	      accepts: "application/json",
-		  url: '/delete_account',
+		  url: '/delete_interaction',
 		  dataType:'json',
 		  data: data,
 		  success: function(json){
