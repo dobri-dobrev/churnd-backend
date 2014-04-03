@@ -35,6 +35,7 @@ think about adding Google Analitycs or our own shit for tracking
 //delete account (frontend and backend) (Dobri)
 //set up procfile to allow multiple workers (Dobri)
 // add project name to the project expanded view (Dobri)
+Add implemmentation to delete interaction on backend, 
 
 
 Known bugs:
