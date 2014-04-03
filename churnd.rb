@@ -30,7 +30,6 @@ options '/api/*' do
   response.headers["Access-Control-Allow-Origin"] = "*"
   response.headers["Access-Control-Allow-Headers"] = "Content-Type"
   response.headers["Access-Control-Allow-Methods"] = "POST"
-  
 end
 
 #need to make sure this is just for post and not OPTIONS
@@ -61,6 +60,7 @@ post '/api/login' do
 		halt 404
 	else 
 		if User.where(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account']).exists?
+			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account'], type: "login", time: DateTime.now)
 			puts "user already exists"
 			halt 200
 		else
@@ -68,6 +68,7 @@ post '/api/login' do
 				@json_call_params['name'] = 'anon'
 			end
 			User.create(name: @json_call_params['name'], email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account'])
+			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account'], type: "login", time: DateTime.now)
 			puts "user created"
 			halt 200
 		end
@@ -131,7 +132,7 @@ post '/new_project' do
 		return {:res => "exists"}.to_json
 	else
 		puts "created new project"
-		@current_client.projects.create(name: params[:project_name], url: params[:url], accounts: [], interaction_types: [])
+		@current_client.projects.create(name: params[:project_name], url: params[:url], accounts: [], interaction_types: [], account_data: {})
 		return {:res => "win"}.to_json
 	end
 end
