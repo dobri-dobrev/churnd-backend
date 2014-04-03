@@ -216,6 +216,17 @@ post '/delete_interaction' do
 	end
 end
 
+post '/get_users' do
+	users = User.where(project_id: params[:project_id], account: params[:account_name]).to_a
+	user_names = []
+	emails = []
+	for user in users
+		user_names<< user.name
+		emails << user.email
+	end
+	{:users => user_names, :emails =>emails}.to_json
+end
+
 get '/contact' do
 	erb :contact
 end
