@@ -193,6 +193,29 @@ post '/delete_account' do
 	end
 end
 
+post '/new_interaction' do
+	projects = Project.where(_id: params[:project_id]).to_a
+	if projects.length == 0
+		halt 404
+	else
+		@project_to_add_to = projects[0]
+		@project_to_add_to.interaction_types << params[:interaction_name] unless @project_to_add_to.interaction_types.include?(params[:interaction_name]) 
+		@project_to_add_to.save
+		{:ret => 'win'}.to_json
+	end
+end
+
+post '/delete_interaction' do
+	projects = Project.where(_id: params[:project_id]).to_a
+	if projects.length == 0
+		halt 404
+	else
+		@project_to_add_to = projects[0]
+		@project_to_add_to.interaction_types.delete(params[:interaction_name])
+		@project_to_add_to.save
+		halt 200
+	end
+end
 
 get '/contact' do
 	erb :contact
