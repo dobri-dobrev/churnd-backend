@@ -19,9 +19,9 @@ dobavi 6iban user i pass za bazata danni
 
 Features to add:
 // means done
-
+pressing enter when creating account crashes the site...
 handle api errors in the backend (Dobri)
-read up on sidekiq and start setting up a background job to write statistics
+
 //(what action to perform) on success and on error functions in churnd.js (Armaan)
 //clean up and minimize churnd.js to make it exportable (Armaan)
 //add a place where we can download churnd.js from (Armaan)
