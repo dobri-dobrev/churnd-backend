@@ -7,7 +7,7 @@ def calculate_login_frequency(proj)
 		users = User.where(project_id: proj._id, account: acc)
 		for user in users
 			counter = 0
-			logins = Interaction.where(project_id: proj._id, account: acc, email: user.email, type: "login")
+			logins = Interaction.where(project_id: proj._id, account: acc, email: user.email, type: "login", :time.gte => (DateTime.now-7.days))
 			for log in logins
 				counter += 1
 			end
