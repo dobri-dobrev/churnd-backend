@@ -132,7 +132,7 @@ post '/new_project' do
 		return {:res => "exists"}.to_json
 	else
 		puts "created new project"
-		@current_client.projects.create(name: params[:project_name], url: params[:url], accounts: [], interaction_types: [], account_data: {})
+		@current_client.projects.create(name: params[:project_name], url: params[:url], accounts: [], interaction_types: ['login', 'logout'], account_data: {})
 		return {:res => "win"}.to_json
 	end
 end

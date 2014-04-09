@@ -17,6 +17,9 @@ class Project
 	field :accounts, type: Array
 	field :account_data, type: Hash
 	field :weekly_login_rate, type: Float
+	field :daily_interaction_type_use, type: Array
+	field :weekly_interaction_type_use, type: Array
+	field :total_interaction_type_use, type: Array
 	belongs_to :client
 end
 

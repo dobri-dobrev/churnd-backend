@@ -43,7 +43,6 @@ def calculate_login_frequency(proj)
 	proj.account_data = account_data
 	proj.weekly_login_rate = account_average
 	proj.save
-	puts "project average is " + proj.weekly_login_rate.to_s
 	
 end
 
