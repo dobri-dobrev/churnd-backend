@@ -20,7 +20,7 @@ dobavi 6iban user i pass za bazata danni
 Features to add:
 // means done
 pressing enter when creating account crashes the site...
-move interactions and accounts to tables and display stats (Dobri)
+move interactions to tables and display stats 
 Clean up the links on the top and create a simple contacts page with our standard UI kit
 handle api errors in the backend (Dobri)
 NOT DONE add a place where we can download churnd.js from (Armaan)
@@ -30,7 +30,7 @@ change password workflow (frontend and backend)
 forgotten password workflow (frontend and backend)
 think about adding Google Analitycs or our own shit for tracking
 
-
+//move accounts to tables (DObri)
 //redirect index to projects if logged in (Dobri)
 //add link to projects on main page if user logged in (in index.erb) (Armaan)
 //delete projects (frontend and backend) (Dobri )
