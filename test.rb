@@ -5,15 +5,22 @@ puts "Start"
 
 user_List = []
 interaction_List = []
+acc_data = {}
+acc_data['Account 1'] = {}
+acc_data['Account 2'] = {}
+acc_data['Account 1']['user_count'] = 0
+acc_data['Account 2']['user_count'] = 0
 
-project_1 = Client.where(name: "dmd2169").to_a[0].projects.create(name: "Project 1", url: "www.project.com", interaction_types: ['login', 'logout', "button1", "button2"], accounts: ["Account 1", "Account 2"], account_data: {})
+project_1 = Client.where(name: "dmd2169").to_a[0].projects.create(name: "Project 1", url: "www.project.com", interaction_types: ['login', 'logout', "button1", "button2"], accounts: ["Account 1", "Account 2"], account_data: acc_data)
 
 for i in 0..20
    user_List << User.create(name: "User #{i}", email: "email#{i}@gmail.com", project_id: project_1._id, account: "Account 1")
+   project_1.account_data['Account 1']['user_count']+=1
 end
 
 for i in 21..40
    user_List << User.create(name: "User #{i}", email: "email#{i}@gmail.com", project_id: project_1._id, account: "Account 2")
+   project_1.account_data['Account 2']['user_count']+=1
 end
 
 

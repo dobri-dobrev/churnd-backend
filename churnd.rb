@@ -12,7 +12,7 @@ configure do
 end
 
 
-['/hello', '/projects', '/new_project'].each do |path|
+[ '/projects', '/new_project', '/expanded_project', '/delete_project','/new_account', '/delete_account', '/new_interaction', '/delete_interaction', '/get_users'].each do |path|
     before path do
         if session[:name] == nil
         	redirect '/login'
@@ -46,7 +46,6 @@ before '/api/*' do
 				halt 404
 			else
 				@current_project = p[0]
-				puts @current_project.name
 			end	
 		end
 	end
@@ -68,6 +67,7 @@ post '/api/login' do
 				@json_call_params['name'] = 'anon'
 			end
 			User.create(name: @json_call_params['name'], email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account'])
+			@current_project.account_data[@json_call_params['account']]['user_count'] += 1
 			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account'], type: "login", time: DateTime.now)
 			puts "user created"
 			halt 200
@@ -184,8 +184,13 @@ post '/new_account' do
 		halt 404
 	else
 		@project_to_add_to = projects[0]
-		@project_to_add_to.accounts << params[:account_name] unless @project_to_add_to.accounts.include?(params[:account_name]) 
-		@project_to_add_to.save
+		unless @project_to_add_to.accounts.include?(params[:account_name])
+			@project_to_add_to.accounts << params[:account_name]
+			@project_to_add_to.account_data[params[:account_name]] = {}
+			@project_to_add_to.account_data[params[:account_name]]['user_count'] = 0
+			@project_to_add_to.save 
+		end
+		
 		{:ret => 'win'}.to_json
 	end
 end
@@ -197,6 +202,7 @@ post '/delete_account' do
 	else
 		@project_to_add_to = projects[0]
 		@project_to_add_to.accounts.delete(params[:account_name])
+		@project_to_add_to.account_data[params[:account_name]] = {}
 		@project_to_add_to.save
 		halt 200
 	end
