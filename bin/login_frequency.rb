@@ -46,11 +46,13 @@ def calculate_login_frequency(proj)
 	
 end
 
-puts "Start Calculating Login Frequency"
+if __FILE__ == $0
+    puts "Start Calculating Login Use"
 
-Project.all.each do |proj|
-	calculate_login_frequency(proj)
+    Project.all.each do |proj|
+    	calculate_login_frequency(proj))
+    end
+
+
+    puts "Done calculating Login Use"
 end
-
-
-puts "Done calculating Login Frequency"
