@@ -114,7 +114,16 @@ end
 
 
 get '/' do
-	erb :index
+	if session[:name] == nil
+		erb :index
+	else
+		c = Client.where(name: session[:name]).to_a
+		if c.length==0
+			erb :index
+		else
+			redirect '/projects'
+		end
+	end
 end
 
 get '/register' do
