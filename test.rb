@@ -57,5 +57,6 @@ for i in 21..40
 		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Account 2", time: logout_time, type: "logout")
 	end
 end
+project_1.save
 
 puts "done"

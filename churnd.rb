@@ -175,7 +175,7 @@ get '/expanded_project' do
 		halt 404
 	else
 		@project_to_view = projects[0]
-		erb :account
+		erb :expandedproject
 	end
 end
 post '/new_account' do

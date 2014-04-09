@@ -28,9 +28,10 @@ def calculate_login_frequency(proj)
 			user_average = 0.0
 		end
 		if account_data.has_key?(acc)
-			account_data[acc][:weekly_login_rate] = user_average
+			account_data[acc]['weekly_login_rate'] = user_average
 		else
-			account_data[acc] = {:weekly_login_rate => user_average}
+			account_data[acc] = {}
+			account_data[acc]['weekly_login_rate'] = user_average
 		end
 		account_average += user_average
 		
@@ -50,7 +51,7 @@ if __FILE__ == $0
     puts "Start Calculating Login Use"
 
     Project.all.each do |proj|
-    	calculate_login_frequency(proj))
+    	calculate_login_frequency(proj)
     end
 
 
