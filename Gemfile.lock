@@ -42,6 +42,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   bcrypt
   bson_ext
   json
