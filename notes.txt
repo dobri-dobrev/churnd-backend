@@ -40,7 +40,7 @@ think about adding Google Analitycs or our own shit for tracking
 //(what action to perform) on success and on error functions in churnd.js (Armaan)
 //clean up and minimize churnd.js to make it exportable (Armaan)
 
-// add a place where we can download churnd.js from (Armaan)
+// add a place where we can download churnd.js from (Armaan): WHERE IS THIS? ;o
 // front page design (frontend) (Armaan) - NEEDS INTEGRATION
 
 
