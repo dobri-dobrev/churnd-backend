@@ -23,9 +23,8 @@ pressing enter when creating account crashes the site...
 move interactions to tables and display stats 
 Clean up the links on the top and create a simple contacts page with our standard UI kit
 handle api errors in the backend (Dobri)
-NOT DONE add a place where we can download churnd.js from (Armaan)
 view users in account as list (frontend and backend) (Armaan)
-front page design (frontend) (Armaan)
+
 change password workflow (frontend and backend)
 forgotten password workflow (frontend and backend)
 think about adding Google Analitycs or our own shit for tracking
@@ -40,6 +39,9 @@ think about adding Google Analitycs or our own shit for tracking
 //Add implemmentation to delete interaction on backend (Dobri) 
 //(what action to perform) on success and on error functions in churnd.js (Armaan)
 //clean up and minimize churnd.js to make it exportable (Armaan)
+
+// add a place where we can download churnd.js from (Armaan)
+// front page design (frontend) (Armaan) - NEEDS INTEGRATION
 
 
 Known bugs:
