@@ -6,21 +6,21 @@ puts "Start"
 user_List = []
 interaction_List = []
 acc_data = {}
-acc_data['Account 1'] = {}
-acc_data['Account 2'] = {}
-acc_data['Account 1']['user_count'] = 0
-acc_data['Account 2']['user_count'] = 0
+acc_data['Perkla'] = {}
+acc_data['Kwoller'] = {}
+acc_data['Perkla']['user_count'] = 0
+acc_data['Kwoller']['user_count'] = 0
 
-project_1 = Client.where(name: "dmd2169").to_a[0].projects.create(name: "Project 1", url: "www.project.com", interaction_types: ['login', 'logout', "button1", "button2"], accounts: ["Account 1", "Account 2"], account_data: acc_data)
+project_1 = Client.where(name: "dmd2169").to_a[0].projects.create(name: "Percolate", url: "www.project.com", interaction_types: ['login', 'logout', "button1", "button2"], accounts: ["Perkla", "Kwoller"], account_data: acc_data)
 
 for i in 0..20
-   user_List << User.create(name: "User #{i}", email: "email#{i}@gmail.com", project_id: project_1._id, account: "Account 1")
-   project_1.account_data['Account 1']['user_count']+=1
+   user_List << User.create(name: "User #{i}", email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla")
+   project_1.account_data['Perkla']['user_count']+=1
 end
 
 for i in 21..40
-   user_List << User.create(name: "User #{i}", email: "email#{i}@gmail.com", project_id: project_1._id, account: "Account 2")
-   project_1.account_data['Account 2']['user_count']+=1
+   user_List << User.create(name: "User #{i}", email: "email#{i}@gmail.com", project_id: project_1._id, account: "Kwoller")
+   project_1.account_data['Kwoller']['user_count']+=1
 end
 
 
@@ -30,8 +30,8 @@ for i in 0..10
 		days_ago = DateTime.now-(0..15).to_a.sample.days
 		login_time = days_ago+ (k*30).minutes
 		logout_time = login_time + 20.minutes
-		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Account 1", time: login_time, type: "login")
-		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Account 1", time: logout_time, type: "logout")
+		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: login_time, type: "login")
+		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: logout_time, type: "logout")
 	end
 	
 end
@@ -42,8 +42,8 @@ for i in 11..20
 		days_ago = DateTime.now-(0..15).to_a.sample.days
 		login_time = days_ago+ (k*30).minutes
 		logout_time = login_time + 20.minutes
-		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Account 1", time: login_time, type: "login")
-		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Account 1", time: logout_time, type: "logout")
+		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: login_time, type: "login")
+		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: logout_time, type: "logout")
 	end
 end
 
@@ -53,8 +53,8 @@ for i in 21..40
 		days_ago = DateTime.now-(0..6).to_a.sample.days
 		login_time = days_ago+ (k*30).minutes
 		logout_time = login_time + 20.minutes
-		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Account 2", time: login_time, type: "login")
-		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Account 2", time: logout_time, type: "logout")
+		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Kwoller", time: login_time, type: "login")
+		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Kwoller", time: logout_time, type: "logout")
 	end
 end
 project_1.save
