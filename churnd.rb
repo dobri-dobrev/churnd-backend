@@ -90,7 +90,7 @@ post '/api/login' do
 end
 
 get '/send_email' do
-	Pony.mail(:to => 'dmd2169@columbia.edu', :from => 'sergey@google.com', :subject => 'hi', :body => 'Hello there. \n blah blah blah')
+	Pony.mail(:to => 'dmd2169@columbia.edu', :from => 'dmd2169@columbia.edu', :subject => 'hi', :body => 'Hello there. \n blah blah blah')
 	halt 200
 end
 
