@@ -9,7 +9,9 @@ Heroku RickArmaanDobri
 Mongo stuff
 dbname: churndDB
 
-
+Sendgrid set up:
+export SENDGRID_USERNAME=app23025600@heroku.com
+export SENDGRID_PASSWORD=dlrmbod6
 
 
 To deploy:

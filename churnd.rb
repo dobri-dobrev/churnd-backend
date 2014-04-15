@@ -1,11 +1,24 @@
 require 'sinatra'
+require 'pony'
 require './utils'
 require 'json'
 require 'bcrypt'
 require './db.rb'
-# require 'mongo'
+
 
 configure do
+	Pony.options = {
+	  :via => :smtp,
+	  :via_options => {
+	    :address => 'smtp.sendgrid.net',
+	    :port => '587',
+	    :domain => 'heroku.com',
+	    :user_name => ENV['SENDGRID_USERNAME'],
+	    :password => ENV['SENDGRID_PASSWORD'],
+	    :authentication => :plain,
+	    :enable_starttls_auto => true
+	  }
+	}
 	set :protection, :except => [:http_origin]
  	Mongoid.load!("mongoid.yml")
  	use Rack::Session::Cookie, :secret => ENV['CHURND_COOKIE_SECRET']
@@ -74,6 +87,11 @@ post '/api/login' do
 		end
 	end
 	
+end
+
+get '/send_email' do
+	Pony.mail(:to => 'dmd2169@columbia.edu', :from => 'sergey@google.com', :subject => 'hi', :body => 'Hello there. \n blah blah blah')
+	halt 200
 end
 
 #needs to check if project has the type registered and the account
