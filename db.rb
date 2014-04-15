@@ -51,5 +51,12 @@ class Email
 	field :subject, type: String
 	field :body, type: String
 	field :sent, type: Boolean
+	field :sent_at, type: DateTime
 end
+
+def enqueue_email(from, to, subject, body)
+	Email.create(from: from, to: to, subject: subject, body: body, sent: false)
+end
+
+
 

@@ -90,7 +90,7 @@ post '/api/login' do
 end
 
 get '/send_email' do
-	Pony.mail(:to => 'dmd2169@columbia.edu', :from => 'dmd2169@columbia.edu', :subject => 'hi', :body => 'Hello there. \n blah blah blah')
+	enqueue_email("dobrev.d10@gmail.com", "dmd2169@columbia.edu", "queue", "wwwwwwaaaaaa")
 	halt 200
 end
 

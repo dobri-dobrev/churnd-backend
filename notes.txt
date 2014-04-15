@@ -21,6 +21,7 @@ dobavi 6iban user i pass za bazata danni
 
 Features to add:
 // means done
+FIGURE OUT A WAY TO SET THE MONGO ENV FOR THE BATCH JOBS IN PRODUCTION...
 pressing enter when creating account crashes the site...
 move interactions to tables and display stats 
 
