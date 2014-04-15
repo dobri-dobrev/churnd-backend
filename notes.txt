@@ -9,7 +9,9 @@ Heroku RickArmaanDobri
 Mongo stuff
 dbname: churndDB
 
-
+Sendgrid set up:
+export SENDGRID_USERNAME=app23025600@heroku.com
+export SENDGRID_PASSWORD=dlrmbod6
 
 
 To deploy:
@@ -21,7 +23,8 @@ Features to add:
 // means done
 pressing enter when creating account crashes the site...
 move interactions to tables and display stats 
-Clean up the links on the top and create a simple contacts page with our standard UI kit
+
+create a simple contacts page with our standard UI kit
 handle api errors in the backend (Dobri)
 view users in account as list (frontend and backend) (Armaan)
 
@@ -30,6 +33,7 @@ forgotten password workflow (frontend and backend)
 think about adding Google Analitycs or our own shit for tracking
 
 //move accounts to tables (DObri)
+//Clean up the links on the top (Dobri)
 //redirect index to projects if logged in (Dobri)
 //add link to projects on main page if user logged in (in index.erb) (Armaan)
 //delete projects (frontend and backend) (Dobri )

@@ -43,3 +43,13 @@ class Interaction
 	field :account, type: String
 	belongs_to :user, dependent: :destroy
 end
+
+class Email
+	include Mongoid::Document
+	field :to, type: String
+	field :from, type: String
+	field :subject, type: String
+	field :body, type: String
+	field :sent, type: Boolean
+end
+

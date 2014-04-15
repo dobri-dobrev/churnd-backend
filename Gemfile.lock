@@ -16,6 +16,10 @@ GEM
     eventmachine (1.0.3)
     i18n (0.6.9)
     json (1.8.1)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    mime-types (1.25.1)
     mongoid (3.1.6)
       activemodel (~> 3.2)
       moped (~> 1.4)
@@ -24,6 +28,9 @@ GEM
     moped (1.5.2)
     multi_json (1.8.4)
     origin (1.1.0)
+    polyglot (0.3.4)
+    pony (1.8)
+      mail (>= 2.0)
     rack (1.5.2)
     rack-protection (1.5.2)
       rack
@@ -36,6 +43,9 @@ GEM
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     tilt (1.4.1)
+    treetop (1.4.15)
+      polyglot
+      polyglot (>= 0.3.1)
     tzinfo (0.3.38)
 
 PLATFORMS
@@ -47,5 +57,6 @@ DEPENDENCIES
   bson_ext
   json
   mongoid (~> 3.1.6)
+  pony
   sinatra
   thin
