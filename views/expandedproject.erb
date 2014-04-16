@@ -111,6 +111,7 @@
           <th width="200">Daily use</th>
           <th width="200">Weekly use</th>
           <th width="200">Total use</th>
+           <th width="200"></th>
         </tr>
       </thead>
       <tbody>
@@ -126,7 +127,7 @@
               <td width="200"><%= @project_to_view.weekly_interaction_type_use[@i]*100 %>% </td>
               <td width="200"><%= @project_to_view.total_interaction_type_use[@i]*100 %>% </td>
             <% end %>
-            
+            <td width="200"><a href="#" class="tiny radius button delete-interaction-button" data-intrname= '<%= @project_to_view.interaction_types[@i] %>' data-id='<%= @project_to_view._id%>'>Delete</a></td>
           </tr>
         <% end %>
       </tbody>
