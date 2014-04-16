@@ -103,44 +103,77 @@
 
 
 <div class = "row">
-	<div class="large-12 columns">
-		<table>
-		  <thead>
-		    <tr>
-		      <th width="200">Account Name</th>
-		      <th width="250">Number of users</th>
-		      <th width="200">Weekly Login rate</th>
-		      <th width="200">Churn danger</th>
-		      <th width="200"></th>
-		      <th width="200"></th>
-		    </tr>
-		  </thead>
-		  <tbody>
-			  <% for @account in @project_to_view.accounts %>
-			  	<tr>
-			  		<td width="200"><%= @account %> </td>
-			  		<td width="250"><%= @project_to_view.account_data[@account]['user_count'] %> </td>
-			  		<td width="200">
-			  			<% if @project_to_view.account_data[@account].key?('weekly_login_rate') %>
-			  				<%= @project_to_view.account_data[@account]['weekly_login_rate'] %>
-			  			<% else %>
-			  				No data yet
-			  			<% end %>
-			  		</td>
-			  		<!-- hard coded needs to be changed eventually -->
-			  		<td width="200">0%</td>
-			  		<td width="200">
-			  			<a href="#" class="tiny radius button user-account-button" data-accname = '<%= @account %>' data-id="<%=@project_to_view._id %>">View Users</a>
-			  		</td>
-			  		<td width="200">
-			  			<a href="#" class="tiny radius button right delete-account-button" data-accname= '<%= @account %>' data-id='<%= @project_to_view._id%>'>Delete</a></div>
-			  		</td>
-			  	</tr>	
-			  <% end %>	
-		  </tbody>
-		</table>
-	</div>
+  <div class="large-12 columns">
+    <table>
+      <thead>
+        <tr>
+          <th width="200">Feature</th>
+          <th width="200">Daily use</th>
+          <th width="200">Weekly use</th>
+          <th width="200">Total use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for @i in 0..(@project_to_view.interaction_types.length-1) %>
+          <tr>
+            <td width="200"><%= @project_to_view.interaction_types[@i] %> </td>
+            <% if @project_to_view.daily_interaction_type_use.nil? %>
+              <td width="200">too early to know</td>
+              <td width="200">too early to know</td>
+              <td width="200">too early to know</td>
+            <% else %>  
+              <td width="200"><%= @project_to_view.daily_interaction_type_use[@i]*100 %>% </td>
+              <td width="200"><%= @project_to_view.weekly_interaction_type_use[@i]*100 %>% </td>
+              <td width="200"><%= @project_to_view.total_interaction_type_use[@i]*100 %>% </td>
+            <% end %>
+            
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+ </div>
+
+<div class = "row">
+  <div class="large-12 columns">
+    <table>
+      <thead>
+        <tr>
+          <th width="200">Account Name</th>
+          <th width="250">Number of users</th>
+          <th width="200">Weekly Login rate</th>
+          <th width="200">Churn danger</th>
+          <th width="200"></th>
+          <th width="200"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for @account in @project_to_view.accounts %>
+          <tr>
+            <td width="200"><%= @account %> </td>
+            <td width="250"><%= @project_to_view.account_data[@account]['user_count'] %> </td>
+            <td width="200">
+              <% if @project_to_view.account_data[@account].key?('weekly_login_rate') %>
+                <%= @project_to_view.account_data[@account]['weekly_login_rate'] %>
+              <% else %>
+                No data yet
+              <% end %>
+            </td>
+            <!-- hard coded needs to be changed eventually -->
+            <td width="200">0%</td>
+            <td width="200">
+              <a href="#" class="tiny radius button user-account-button" data-accname = '<%= @account %>' data-id="<%=@project_to_view._id %>">View Users</a>
+            </td>
+            <td width="200">
+              <a href="#" class="tiny radius button right delete-account-button" data-accname= '<%= @account %>' data-id='<%= @project_to_view._id%>'>Delete</a></div>
+            </td>
+          </tr> 
+        <% end %> 
+      </tbody>
+    </table>
+  </div>
 </div>
+
 
 
 <!-- modals, dont touch -->

@@ -31,6 +31,9 @@ for i in 0..10
 		login_time = days_ago+ (k*30).minutes
 		logout_time = login_time + 20.minutes
 		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: login_time, type: "login")
+		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: login_time, type: "button1")
+		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: login_time, type: "button1")
+		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: login_time, type: "button2")
 		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: logout_time, type: "logout")
 	end
 	
@@ -43,6 +46,9 @@ for i in 11..20
 		login_time = days_ago+ (k*30).minutes
 		logout_time = login_time + 20.minutes
 		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: login_time, type: "login")
+		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: login_time, type: "button1")
+		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: login_time, type: "button1")
+		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: login_time, type: "button2")
 		interaction_List << Interaction.create(email: "email#{i}@gmail.com", project_id: project_1._id, account: "Perkla", time: logout_time, type: "logout")
 	end
 end
