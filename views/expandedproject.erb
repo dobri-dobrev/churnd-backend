@@ -121,7 +121,7 @@
             <td width="250"><%= @project_to_view.account_data[@account]['user_count'] %> </td>
             <td width="200">
               <% if @project_to_view.account_data[@account].key?('weekly_login_rate') %>
-                <%= @project_to_view.account_data[@account]['weekly_login_rate'] %>
+                <%= @project_to_view.account_data[@account]['weekly_login_rate'].round(2) %>
               <% else %>
                 No data yet
               <% end %>
@@ -163,9 +163,9 @@
               <td width="200">too early to know</td>
               <td width="200">too early to know</td>
             <% else %>  
-              <td width="200"><%= @project_to_view.daily_interaction_type_use[@i]*100 %>% </td>
-              <td width="200"><%= @project_to_view.weekly_interaction_type_use[@i]*100 %>% </td>
-              <td width="200"><%= @project_to_view.total_interaction_type_use[@i]*100 %>% </td>
+              <td width="200"><%= (@project_to_view.daily_interaction_type_use[@i]*100).round(2) %>% </td>
+              <td width="200"><%= (@project_to_view.weekly_interaction_type_use[@i]*100).round(2) %>% </td>
+              <td width="200"><%= (@project_to_view.total_interaction_type_use[@i]*100).round(2) %>% </td>
             <% end %>
             <td width="200"><a href="#" class="tiny radius button delete-interaction-button" data-intrname= '<%= @project_to_view.interaction_types[@i] %>' data-id='<%= @project_to_view._id%>'>Delete</a></td>
           </tr>
