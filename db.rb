@@ -10,6 +10,9 @@ class Client
 end
 
 class Project
+	#account data is kept in a hash
+	# current fields in the hash: weekly_login_rate, user_count
+	#interaction data is kept in arrays weirdly enough
 	include Mongoid::Document
 	field :name, type: String
 	field :url, type: String

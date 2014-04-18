@@ -13,7 +13,7 @@ configure do
 end
 
 
-[ '/projects', '/new_project', '/expanded_project', '/delete_project','/new_account', '/delete_account', '/new_interaction', '/delete_interaction', '/get_users'].each do |path|
+[ '/projects', '/new_project', '/expanded_project', '/delete_project','/new_account', '/delete_account', '/new_interaction', '/delete_interaction', '/expanded_account'].each do |path|
     before path do
         if session[:name] == nil
         	redirect '/login'
@@ -76,7 +76,7 @@ post '/api/login' do
 	end
 	
 end
-
+# GET RID OF THIS
 get '/send_email' do
 	enqueue_email("dobrev.d10@gmail.com", "dmd2169@columbia.edu", "queue", "wwwwwwaaaaaa")
 	halt 200
@@ -238,15 +238,11 @@ post '/delete_interaction' do
 	end
 end
 
-post '/get_users' do
-	users = User.where(project_id: params[:project_id], account: params[:account_name]).to_a
-	user_names = []
-	emails = []
-	for user in users
-		user_names<< user.name
-		emails << user.email
-	end
-	{:users => user_names, :emails =>emails}.to_json
+get '/expanded_account' do
+	current_project = Project.where(_id: params[:project_id]).to_a[0]
+	@account_data = current_project.account_data[params[:account]]
+	@users_in_account = User.where(project_id: params[:project_id], account: params[:account]).to_a
+	erb :expanded_account
 end
 
 get '/contact' do

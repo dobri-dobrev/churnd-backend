@@ -110,14 +110,13 @@
           <th width="250">Number of users</th>
           <th width="200">Weekly Login rate</th>
           <th width="200">Churn danger</th>
-          <th width="200"></th>
-          <th width="200"></th>
+          <th width="100"></th>
         </tr>
       </thead>
       <tbody>
         <% for @account in @project_to_view.accounts %>
           <tr>
-            <td width="200"><%= @account %> </td>
+            <td width="200"><a href="/expanded_account?project_id=<%= @project_to_view._id%>&account=<%= @account %>"><%= @account %></a></td>
             <td width="250"><%= @project_to_view.account_data[@account]['user_count'] %> </td>
             <td width="200">
               <% if @project_to_view.account_data[@account].key?('weekly_login_rate') %>
@@ -128,10 +127,8 @@
             </td>
             <!-- hard coded needs to be changed eventually -->
             <td width="200">0%</td>
-            <td width="200">
-              <a href="#" class="tiny radius button user-account-button" data-accname = '<%= @account %>' data-id="<%=@project_to_view._id %>">View Users</a>
-            </td>
-            <td width="200">
+            
+            <td width="100">
               <a href="#" class="tiny radius button right delete-account-button" data-accname= '<%= @account %>' data-id='<%= @project_to_view._id%>'>Delete</a></div>
             </td>
           </tr> 
@@ -151,7 +148,7 @@
           <th width="200">Daily use</th>
           <th width="200">Weekly use</th>
           <th width="200">Total use</th>
-           <th width="200"></th>
+           <th width="100"></th>
         </tr>
       </thead>
       <tbody>
@@ -167,7 +164,7 @@
               <td width="200"><%= (@project_to_view.weekly_interaction_type_use[@i]*100).round(2) %>% </td>
               <td width="200"><%= (@project_to_view.total_interaction_type_use[@i]*100).round(2) %>% </td>
             <% end %>
-            <td width="200"><a href="#" class="tiny radius button delete-interaction-button" data-intrname= '<%= @project_to_view.interaction_types[@i] %>' data-id='<%= @project_to_view._id%>'>Delete</a></td>
+            <td width="100"><a href="#" class="tiny radius button delete-interaction-button" data-intrname= '<%= @project_to_view.interaction_types[@i] %>' data-id='<%= @project_to_view._id%>'>Delete</a></td>
           </tr>
         <% end %>
       </tbody>
@@ -248,8 +245,7 @@
 
   <script src="js/vendor/jquery.js"></script>
   <script src="js/foundation.min.js"></script>
-  <script src="js/createAccount.js"></script>
-  <script src="js/createInteraction.js"></script>
+  <script src="js/expanded_project.js"></script>
 
     <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
