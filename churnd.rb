@@ -240,6 +240,9 @@ end
 
 get '/expanded_account' do
 	current_project = Project.where(_id: params[:project_id]).to_a[0]
+	if current_project.nil? or current_project.accounts.index(params[:account]).nil?
+		halt 404
+	end
 	@account_data = current_project.account_data[params[:account]]
 	@users_in_account = User.where(project_id: params[:project_id], account: params[:account]).to_a
 	erb :expanded_account
