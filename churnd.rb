@@ -260,7 +260,7 @@ post '/add_rule' do
 		halt 404
 	else
 		if Account.where(_id: params[:account_id]).exists?
-			Rule.create(account_id: params[:account_id], name: params[:name], action: params[:action], from: params[:from], metric: params[:metric], greater_than: params[:greater_than], value: params[:value].to_f )
+			Rule.create(account_id: params[:account_id], name: params[:name], action: params[:action], from: params[:from], metric: params[:metric], greater_than: params[:greater_than], value: params[:value].to_f, emails_sent: 0 )
 			halt 200
 		else
 			halt 404
@@ -269,7 +269,12 @@ post '/add_rule' do
 end
 
 post '/delete_rule' do
-
+	if params[:rule_id].nil?
+		halt 404
+	else
+		Rule.where(_id: params[:rule_id]).delete
+		halt 200
+	end
 end
 
 get '/contact' do
