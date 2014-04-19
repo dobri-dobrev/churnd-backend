@@ -250,7 +250,7 @@ get '/expanded_account' do
 		halt 404
 	end
 	@users_in_account = User.where(project_id: params[:project_id], account_id: @current_account._id).to_a
-	@rules_in_account = Account.where(account_id: @current_account._id)
+	@rules_in_account = Rule.where(account_id: @current_account._id)
 	erb :expanded_account
 end
 
