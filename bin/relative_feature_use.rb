@@ -56,12 +56,40 @@ def calculate_feature_use(proj)
 	proj.save
 end
 
+def calculate_feature_use_for_account(acc)
+	proj = Project.where(_id: acc.project_id).to_a[0]
+	project_features = proj.interaction_types
+	total_counts = {}
+	total_total = 0
+	for p in project_features
+		total_counts[p] = 0
+	end
+	account_interactions = Interaction.where(project_id: proj._id, account_id: acc._id).to_a
+	for i in account_interactions
+		total_total+= 1
+		total_counts[i.type] += 1
+	end
+	total_results =[]
+	for feature in project_features
+		if total_total > 0
+			total_results << total_counts[feature].fdiv(total_total)
+		else
+			total_results << 0
+		end
+	end
+	acc.total_interaction_use = total_results
+end
+
+
 if __FILE__ == $0
     puts "Start Calculating Feature Use"
 
     Project.all.each do |proj|
-    	add_week_if_needed(proj)
+    	#add_week_if_needed(proj)
     	calculate_feature_use(proj)
+    end
+    Account.all.each do|acc|
+    	calculate_feature_use_for_account(acc)
     end
 
 
