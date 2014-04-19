@@ -209,11 +209,14 @@ post '/new_account' do
 end
 
 post '/delete_account' do
-	if Account.where(project_id: params[:project_id], name: params[:account_name]).exists?
-		Account.where(project_id: params[:project_id], name: params[:account_name]).delete
-		halt 200
-	else
+	acc = Account.where(project_id: params[:project_id], name: params[:account_name]).to_a[0]
+	if acc.nil?
 		halt 404
+		
+	else
+		acc.delete
+		Rule.where(account_id: acc._id ).delete
+		halt 200
 	end
 end
 
@@ -247,6 +250,7 @@ get '/expanded_account' do
 		halt 404
 	end
 	@users_in_account = User.where(project_id: params[:project_id], account_id: @current_account._id).to_a
+	@rules_in_account = Account.where(account_id: @current_account._id)
 	erb :expanded_account
 end
 

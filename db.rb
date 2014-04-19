@@ -66,6 +66,17 @@ class Email
 	field :sent_at, type: DateTime
 end
 
+class Rule
+	include Mongoid::Document
+	field :account_id, type: String
+	field :name, type: String
+	field :action, type: String
+	field :from, type: String
+	field :metric, type: String
+	field :greater_than, type: Integer
+	field :value, type: Float
+end
+
 def enqueue_email(from, to, subject, body)
 	Email.create(from: from, to: to, subject: subject, body: body, sent: false)
 end
