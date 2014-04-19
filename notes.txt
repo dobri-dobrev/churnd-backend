@@ -5,6 +5,10 @@ delete expandedaccounts.erb
 
 Heroku RickArmaanDobri
 
+feature - currentproject ->interaction types
+
+values - currentaccount -> total_interaction_use
+
 
 Mongo stuff
 dbname: churndDB
