@@ -75,6 +75,7 @@ class Rule
 	field :metric, type: String
 	field :greater_than, type: Integer
 	field :value, type: Float
+	field :emails_sent, type: Integer
 end
 
 def enqueue_email(from, to, subject, body)
