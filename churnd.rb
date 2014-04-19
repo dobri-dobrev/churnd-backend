@@ -4,6 +4,7 @@ require './utils'
 require 'json'
 require 'bcrypt'
 require './db.rb'
+require 'active_support/all'
 
 
 configure do
@@ -56,21 +57,24 @@ end
 #needs to check if project has that account
 post '/api/login' do
 	response.headers["Access-Control-Allow-Origin"] = "*"
+	current_account = Account.where(project_id: @json_call_params['key'], name: @json_call_params['account']).to_a[0]
+	if current_account.nil?
+		halt 404
+	end
 	if @json_call_params['email']==nil || @json_call_params['key'] == nil || @json_call_params['account'] == nil
 		halt 404
 	else 
-		if User.where(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account']).exists?
-			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account'], type: "login", time: DateTime.now)
-			puts "user already exists"
+		if User.where(email: @json_call_params['email'], project_id: @json_call_params['key'], account_id: current_account._id ).exists?
+			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_id: current_account._id, type: "login", time: DateTime.now)
 			halt 200
 		else
 			if @json_call_params['name'] == nil
 				@json_call_params['name'] = 'anon'
 			end
-			User.create(name: @json_call_params['name'], email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account'])
-			@current_project.account_data[@json_call_params['account']]['user_count'] += 1
-			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account'], type: "login", time: DateTime.now)
-			puts "user created"
+			User.create(name: @json_call_params['name'], email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: current_account._id)
+			current_account.user_count += 1
+			current_account.save
+			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_id: current_account._id, type: "login", time: DateTime.now)
 			halt 200
 		end
 	end
@@ -88,9 +92,12 @@ post '/api/track' do
 	if @json_call_params['email'] == nil || @json_call_params['type'] == nil || @json_call_params['key'] == nil || @json_call_params['account'] == nil
 		halt 404
 	else
-		if User.where(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account']).exists?
-			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account'], type: @json_call_params['type'], time: DateTime.now)
-			puts "created interaction"
+		current_account = Account.where(project_id: @json_call_params['key'], name: @json_call_params['account']).to_a[0]
+		if current_account.nil?
+			halt 404
+		end
+		if User.where(email: @json_call_params['email'], project_id: @json_call_params['key'], account_id: current_account._id).exists?
+			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_id: current_account._id, type: @json_call_params['type'], time: DateTime.now)
 			halt 200
 		else
 			halt 404
@@ -104,9 +111,12 @@ post '/api/logout' do
 	if @json_call_params['email'] == nil || @json_call_params['key'] == nil || @json_call_params['account'] == nil
 		halt 404
 	else
-		if User.where(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account']).exists?
-			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: @json_call_params['account'], type: "logout", time: DateTime.now)
-			puts "logout recorded"
+		current_account = Account.where(project_id: @json_call_params['key'], name: @json_call_params['account']).to_a[0]
+		if current_account.nil?
+			halt 404
+		end
+		if User.where(email: @json_call_params['email'], project_id: @json_call_params['key'], account_id: current_account._id).exists?
+			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_id: current_account._id, type: "logout", time: DateTime.now)
 			halt 200
 		else
 			halt 404
@@ -147,13 +157,12 @@ post '/new_project' do
 		return {:res => "exists"}.to_json
 	else
 		puts "created new project"
-		@current_client.projects.create(name: params[:project_name], url: params[:url], accounts: [], interaction_types: ['login', 'logout'], account_data: {})
+		@current_client.projects.create(name: params[:project_name], url: params[:url], interaction_types: ['login', 'logout'])
 		return {:res => "win"}.to_json
 	end
 end
 
 post '/delete_project' do
-	puts params[:project_id]
 	Project.where(_id: params[:project_id]).delete
 	halt 200
 end
@@ -181,6 +190,7 @@ get '/expanded_project' do
 		halt 404
 	else
 		@project_to_view = projects[0]
+		@accounts = Account.where(project_id: @project_to_view._id).to_a
 		erb :expandedproject
 	end
 end
@@ -190,11 +200,8 @@ post '/new_account' do
 		halt 404
 	else
 		@project_to_add_to = projects[0]
-		unless @project_to_add_to.accounts.include?(params[:account_name])
-			@project_to_add_to.accounts << params[:account_name]
-			@project_to_add_to.account_data[params[:account_name]] = {}
-			@project_to_add_to.account_data[params[:account_name]]['user_count'] = 0
-			@project_to_add_to.save 
+		unless Account.where(name: params[:account_name], project_id: @project_to_add_to._id).exists?
+			Account.create(name: params[:account_name], project_id: @project_to_add_to._id, user_count: 0, data_by_week: [])
 		end
 		
 		{:ret => 'win'}.to_json
@@ -202,15 +209,11 @@ post '/new_account' do
 end
 
 post '/delete_account' do
-	projects = Project.where(_id: params[:project_id]).to_a
-	if projects.length == 0
-		halt 404
-	else
-		@project_to_add_to = projects[0]
-		@project_to_add_to.accounts.delete(params[:account_name])
-		@project_to_add_to.account_data[params[:account_name]] = {}
-		@project_to_add_to.save
+	if Account.where(project_id: params[:project_id], name: params[:account_name]).exists?
+		Account.where(project_id: params[:project_id], name: params[:account_name]).delete
 		halt 200
+	else
+		halt 404
 	end
 end
 
@@ -239,12 +242,11 @@ post '/delete_interaction' do
 end
 
 get '/expanded_account' do
-	current_project = Project.where(_id: params[:project_id]).to_a[0]
-	if current_project.nil? or current_project.accounts.index(params[:account]).nil?
+	@current_account = Account.where(project_id: params[:project_id], name: params[:account]).to_a[0]
+	if @current_account.nil?
 		halt 404
 	end
-	@account_data = current_project.account_data[params[:account]]
-	@users_in_account = User.where(project_id: params[:project_id], account: params[:account]).to_a
+	@users_in_account = User.where(project_id: params[:project_id], account_id: @current_account._id).to_a
 	erb :expanded_account
 end
 

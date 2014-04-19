@@ -10,15 +10,13 @@ class Client
 end
 
 class Project
-	#account data is kept in a hash
-	# current fields in the hash: weekly_login_rate, user_count
+	# account data is kept in a hash which contains a hash for every account
+	# current fields in the hash: weekly_login_rate, monthly_login_rate, total_login_rate , user_count, last_week_ends, by_week
 	#interaction data is kept in arrays weirdly enough
 	include Mongoid::Document
 	field :name, type: String
 	field :url, type: String
 	field :interaction_types, type: Array
-	field :accounts, type: Array
-	field :account_data, type: Hash
 	field :weekly_login_rate, type: Float
 	field :daily_interaction_type_use, type: Array
 	field :weekly_interaction_type_use, type: Array
@@ -26,6 +24,16 @@ class Project
 	belongs_to :client
 end
 
+#transfering to new account set up
+class Account
+
+	include Mongoid::Document
+	field :name, type: String
+	field :user_count, type: Integer
+	field :project_id, type: String
+	field :data_by_week, type: Array
+	field :weekly_login_rate, type: Float
+end
 
 
 class User
@@ -33,7 +41,7 @@ class User
 	field :name, type: String
 	field :email, type: String
 	field :project_id, type: String
-	field :account, type: String
+	field :account_id, type: String
 	field :weekly_login_rate, type: Float
 end
 
@@ -43,7 +51,7 @@ class Interaction
 	field :time, type: DateTime
 	field :email, type: String
 	field :project_id, type: String
-	field :account, type: String
+	field :account_id, type: String
 	belongs_to :user, dependent: :destroy
 end
 

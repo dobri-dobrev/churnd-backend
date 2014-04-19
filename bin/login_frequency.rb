@@ -1,6 +1,4 @@
-require './db.rb'
-require 'active_support/all'
-Mongoid.load!("mongoid.yml", :development)
+require './bin/week_updater.rb'
 
 def calculate_login_frequency(proj)
 	account_count = 0.0
@@ -47,11 +45,26 @@ def calculate_login_frequency(proj)
 	
 end
 
+def calculate_logins_in_range(start_date, end_date, proj, account)
+	usrs = User.where(project_id: proj._id, account: account)
+	total_user_average = 0.0
+	for user in usrs
+
+		logins = Interaction.where(project_id: proj._id, account: account, email: user.email, type: "login", :time.gte => start_date, :time.ste => end_date).to_a
+		total_user_average += logins.length
+	end
+	return total_user_average/proj.account_data[account][user_count].to_f
+end
+
 if __FILE__ == $0
     puts "Start Calculating Login Use"
 
     Project.all.each do |proj|
-    	calculate_login_frequency(proj)
+    	add_week_if_needed(proj)
+    	for account in proj.accounts
+    		#puts calculate_logins_in_range(DateTime.now-7.days, DateTime.now, proj, account)
+    	end
+    	# calculate_login_frequency(proj)
     end
 
 

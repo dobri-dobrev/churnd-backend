@@ -1,6 +1,4 @@
-require './db.rb'
-require 'active_support/all'
-Mongoid.load!("mongoid.yml", :development)
+require './bin/week_updater.rb'
 
 
 def calculate_feature_use(proj)
@@ -62,6 +60,7 @@ if __FILE__ == $0
     puts "Start Calculating Feature Use"
 
     Project.all.each do |proj|
+    	add_week_if_needed(proj)
     	calculate_feature_use(proj)
     end
 
