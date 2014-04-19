@@ -14,7 +14,7 @@ configure do
 end
 
 
-[ '/projects', '/new_project', '/expanded_project', '/delete_project','/new_account', '/delete_account', '/new_interaction', '/delete_interaction', '/expanded_account'].each do |path|
+[ '/projects', '/new_project', '/expanded_project', '/delete_project','/new_account', '/delete_account', '/new_interaction', '/delete_interaction', '/expanded_account', '/add_rule', '/delete_rule'].each do |path|
     before path do
         if session[:name] == nil
         	redirect '/login'
@@ -246,12 +246,30 @@ end
 
 get '/expanded_account' do
 	@current_account = Account.where(project_id: params[:project_id], name: params[:account]).to_a[0]
+	@current_project = Project.where(_id: @current_account.project_id).to_a[0]
 	if @current_account.nil?
 		halt 404
 	end
 	@users_in_account = User.where(project_id: params[:project_id], account_id: @current_account._id).to_a
 	@rules_in_account = Rule.where(account_id: @current_account._id)
 	erb :expanded_account
+end
+
+post '/add_rule' do
+	if params[:account_id].nil? || params[:name].nil? || params[:action].nil? || params[:from].nil? || params[:metric].nil? || params[:greater_than].nil? || params[:value].nil? 
+		halt 404
+	else
+		if Account.where(_id: params[:account_id]).exists?
+			Rule.create(account_id: params[:account_id], name: params[:name], action: params[:action], from: params[:from], metric: params[:metric], greater_than: params[:greater_than], value: params[:value].to_f )
+			halt 200
+		else
+			halt 404
+		end
+	end
+end
+
+post '/delete_rule' do
+
 end
 
 get '/contact' do
