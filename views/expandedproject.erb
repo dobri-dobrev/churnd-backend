@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Account Dashboard</title>
   <link rel="stylesheet" href="css/foundation.css" />
+  <link rel="stylesheet" href="css/expanded_project.css" />
   <script src="js/vendor/modernizr.js"></script>
 
 
@@ -60,7 +61,9 @@
         <div class="row">
           <div class="large-9 columns">
             <p>Add accounts and interactions</p>
+            <a href="#" class="radius button left" id="project-refresh-button"  data-id='<%= @project_to_view._id%>'>Refresh</a>
           </div>
+          
           <div class="large-3 columns">
             <a href="#" data-reveal-id="accountModal" class="radius button right">Add an Account</a>
           </div>
@@ -129,7 +132,7 @@
             <td width="200">0%</td>
             
             <td width="100">
-              <a href="#" class="tiny radius button right delete-account-button" data-accname= '<%= @account.name %>' data-id='<%= @project_to_view._id%>'>Delete</a></div>
+              <a href="#" class="tiny radius button right delete-account-button" data-accname= '<%= @account.name %>' data-id='<%= @project_to_view._id%>'>Delete</a>
             </td>
           </tr> 
         <% end %> 

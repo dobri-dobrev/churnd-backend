@@ -34,6 +34,24 @@ $(function(){
 		
 	});
 
+	$("#project-refresh-button").click(function(event){
+		data = {};
+		data['project_id'] = $(this).data('id');
+		$.ajax({
+	      type: 'POST',
+	      accepts: "application/json",
+		  url: '/refresh_project_data',
+		  
+		  data: data,
+		  success: function(){
+		  	window.location.replace("/expanded_project?" + "project_id=" + data['project_id']);
+		  },
+		  error: function(){
+		  	console.log("internal server error");
+		  }
+		});
+	});
+
 	$(".delete-account-button").click(function(event){
 		data = {};
 		data['project_id'] = $(this).data('id');
