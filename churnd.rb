@@ -277,6 +277,15 @@ post '/delete_rule' do
 	end
 end
 
+post '/delete_user' do
+	if params[:user_id].nil?
+		halt 404
+	else
+		User.where(_id: params[:user_id]).delete
+		halt 200
+	end
+end
+
 get '/contact' do
 	erb :contact
 end

@@ -75,7 +75,10 @@
 
 
 <div class = "row">
+            <fieldset>
+      <legend> Engagement </legend>
 	<div class="large-6 columns">
+
     <% if @project_to_view.total_interaction_type_use.nil? %>
     <div class="panel">
                 <h5><a href="#">No Interactions Yet</a></h5>
@@ -84,13 +87,15 @@
                   Wait until data is populated
                 </h6>
  
-                <h6><a href="#">Add Now »</a></h6>
+                <h6><a >Add Now »</a></h6>
               </div>
 
     <% else %>  
     <div id="totalcontainer" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     <% end %>
+
   </div>
+
   <div class="large-6 columns">
     <% if @project_to_view.weekly_interaction_type_use.nil? %>
 
@@ -99,6 +104,7 @@
     <div id="weeklycontainer" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     <% end %>
   </div>
+  </fieldset>
 </div>
 
 <div class = "row">

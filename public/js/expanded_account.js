@@ -64,4 +64,31 @@ $(function(){
 
 		});
 
+		$(".delete_user_button").click(function(event){
+		var project_id = $(this).data('projectid');
+		var account_name = $(this).data('accountname');
+
+		data = {};
+
+		data['user_id'] = $(this).data('userid');
+		
+		$.ajax({
+	      type: 'POST',
+	      accepts: "application/json",
+		  url: '/delete_user',
+		  dataType:'json',
+		  data: data,
+		  success: function(){
+		  	console.log("success")
+		  	
+		  },
+		  error: function(){
+		  	console.log("internal server error");
+		  	window.location.replace("/expanded_account?" + "project_id=" + project_id + "&account=" + account_name);
+		  }
+		});
+
+
+		});
+
 });
