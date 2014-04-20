@@ -37,4 +37,31 @@ $(function(){
 		
 	});
 
+	$(".delete_rule_button").click(function(event){
+		var project_id = $(this).data('projectid');
+		var account_name = $(this).data('accountname');
+
+		data = {};
+
+		data['rule_id'] = $(this).data('ruleid');
+		
+		$.ajax({
+	      type: 'POST',
+	      accepts: "application/json",
+		  url: '/delete_rule',
+		  dataType:'json',
+		  data: data,
+		  success: function(){
+		  	console.log("success")
+		  	
+		  },
+		  error: function(){
+		  	console.log("internal server error");
+		  	window.location.replace("/expanded_account?" + "project_id=" + project_id + "&account=" + account_name);
+		  }
+		});
+
+
+		});
+
 });
