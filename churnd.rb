@@ -5,6 +5,8 @@ require 'json'
 require 'bcrypt'
 require './db.rb'
 require 'active_support/all'
+require './bin/login_frequency.rb'
+require './bin/relative_feature_use.rb'
 
 
 configure do
@@ -14,7 +16,7 @@ configure do
 end
 
 
-[ '/projects', '/new_project', '/expanded_project', '/delete_project','/new_account', '/delete_account', '/new_interaction', '/delete_interaction', '/expanded_account', '/add_rule', '/delete_rule'].each do |path|
+[ '/projects', '/new_project', '/expanded_project', '/delete_project','/new_account', '/delete_account', '/new_interaction', '/delete_interaction', '/expanded_account', '/add_rule', '/delete_rule', '/refresh_project_data'].each do |path|
     before path do
         if session[:name] == nil
         	redirect '/login'
@@ -159,6 +161,26 @@ post '/new_project' do
 		puts "created new project"
 		@current_client.projects.create(name: params[:project_name], url: params[:url], interaction_types: ['login', 'logout'])
 		return {:res => "win"}.to_json
+	end
+end
+
+post '/refresh_project_data' do
+	if params[:project_id].nil?
+		halt 404
+	else
+		proj = Project.where(_id: params[:project_id]).to_a[0]
+		if proj.nil?
+			halt 404
+		else
+			calculate_login_frequency(proj)
+			calculate_feature_use(proj)
+			accounts = Account.where(project_id: proj._id).to_a
+			for a in accounts
+				calculate_feature_use_for_account(a)
+			end
+			puts "ran all the crap"
+			halt 200
+		end
 	end
 end
 
