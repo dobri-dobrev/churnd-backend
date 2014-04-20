@@ -100,9 +100,9 @@
   <div class="row">
     <div class="large-4 columns">
       <label>Select Feature
-        <select>
+        <select id="rule_feature">
           <% for @i in 0..(@current_project.interaction_types.length-1) %>
-          <option data-feature="<%= @current_project.interaction_types[@i] %>"><%= @current_project.interaction_types[@i] %>
+          <option value="<%= @current_project.interaction_types[@i] %>"><%= @current_project.interaction_types[@i] %>
           </option>
           <% end %>
         </select>
@@ -110,10 +110,10 @@
     </div>
     <div class="large-4 columns">
       <label> Select option
-        <select>
-          <option id="rule_greater"> Greater than
+        <select id="rule_option">
+          <option value="1"> Greater than
           </option>
-          <option id="rule_lesser"> Lesser than
+          <option value="2"> Lesser than
           </option>
         </select>
       </label>
@@ -125,7 +125,7 @@
     </div>
   </div>
     <div class="row"> <div class="small-12">  <div class="row">
-  <a href="#" id="rule_create_submit_button" class="radius button right" data-accountid="<%= @current_account.name %>">Submit</a>
+  <a href="#" id="rule_create_submit_button" class="radius button right" data-projectid="<%= @current_project._id %>" data-accountname="<%= @current_account.name %>" data-accountid="<%= @current_account._id %>">Submit</a>
   </div>  </div> </div>
 </form>
 

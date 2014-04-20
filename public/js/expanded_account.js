@@ -10,25 +10,29 @@ $(function(){
 		data['name'] = $("#rule_name").val();
 		data['action'] = $("#rule_action").val();
 		data['from'] = $("#rule_email").val();
-		data['metric'] = $(this).data('feature');
-		data['greater_than'] = 0;
+		data['metric'] = $("#rule_feature").val();
+		data['greater_than'] = $("#rule_option").val();
 		data['value'] = $("#rule_value").val();
+		data['emails_sent'] = 0;
 
-	console.log(data);
-		// $.ajax({
-	 //      type: 'POST',
-	 //      accepts: "application/json",
-		//   url: '/new_rule',
-		//   dataType:'json',
-		//   data: data,
-		//   success: function(json){
-		//   	console.log("success")
+		var project_id = $(this).data('projectid');
+		var account_name = $(this).data('accountname');
+
+		$.ajax({
+	      type: 'POST',
+	      accepts: "application/json",
+		  url: '/add_rule',
+		  dataType:'json',
+		  data: data,
+		  success: function(){
+		  	console.log("success")
 		  	
-		//   },
-		//   error: function(){
-		//   	console.log("internal server error");
-		//   }
-		// });
+		  },
+		  error: function(){
+		  	console.log("internal server error");
+		  	window.location.replace("/expanded_account?" + "project_id=" + project_id + "&account=" + account_name);
+		  }
+		});
 
 		
 	});
