@@ -111,16 +111,19 @@ end
 post '/api/logout' do
 	response.headers["Access-Control-Allow-Origin"] = "*"
 	if @json_call_params['email'] == nil || @json_call_params['key'] == nil || @json_call_params['account'] == nil
+		puts "missing paramenter"
 		halt 404
 	else
 		current_account = Account.where(project_id: @json_call_params['key'], name: @json_call_params['account']).to_a[0]
 		if current_account.nil?
+			puts "account does not exist"
 			halt 404
 		end
 		if User.where(email: @json_call_params['email'], project_id: @json_call_params['key'], account_id: current_account._id).exists?
 			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_id: current_account._id, type: "logout", time: DateTime.now)
 			halt 200
 		else
+			puts "user does not exist"
 			halt 404
 		end
 		
