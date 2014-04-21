@@ -43,10 +43,12 @@ before '/api/*' do
 		puts @json_call_params.inspect
 		puts @json_call_params['key']
 		if @json_call_params['key'] == nil
+			puts "no key"
 			halt 404
 		else
 			p = Project.where(_id: @json_call_params['key']).to_a
 			if p.length == 0
+				puts "not project with this key"
 				halt 404
 			else
 				@current_project = p[0]
