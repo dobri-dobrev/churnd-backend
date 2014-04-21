@@ -186,6 +186,9 @@ end
 
 post '/delete_project' do
 	Project.where(_id: params[:project_id]).delete
+	User.where(project_id: params[:project_id]).delete
+	Interaction.where(project_id: params[:project_id]).delete
+	Account.where(project_id: params[:project_id]).delete
 	halt 200
 end
 
@@ -248,12 +251,25 @@ post '/new_interaction' do
 		halt 404
 	else
 		@project_to_add_to = projects[0]
-		@project_to_add_to.interaction_types << params[:interaction_name] unless @project_to_add_to.interaction_types.include?(params[:interaction_name]) 
-		@project_to_add_to.save
+		unless @project_to_add_to.interaction_types.include?(params[:interaction_name])
+			@project_to_add_to.interaction_types << params[:interaction_name] 
+			@project_to_add_to.daily_interaction_type_use << 0.0
+			@project_to_add_to.weekly_interaction_type_use << 0.0
+			@project_to_add_to.total_interaction_type_use << 0.0
+			@project_to_add_to.save
+			accounts_in_project = Account.where(project_id: @project_to_add_to._id).to_a
+			for account in accounts_in_project
+				account.total_interaction_use << 0.0 
+				account.save
+
+			end
+		end
+		
+		
 		{:ret => 'win'}.to_json
 	end
 end
-
+# have add the deletion of entries from the account arrays and interactions
 post '/delete_interaction' do
 	projects = Project.where(_id: params[:project_id]).to_a
 	if projects.length == 0

@@ -33,6 +33,7 @@ $(function(){
 
 		
 	});
+	
 
 	$("#project-refresh-button").click(function(event){
 		data = {};

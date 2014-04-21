@@ -31,6 +31,7 @@ class Account
 	field :name, type: String
 	field :user_count, type: Integer
 	field :project_id, type: String
+	#currently not used
 	field :data_by_week, type: Array
 	field :weekly_login_rate, type: Float
 	field :total_interaction_use, type: Array
