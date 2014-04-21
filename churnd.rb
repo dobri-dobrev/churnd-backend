@@ -38,6 +38,7 @@ end
 
 #need to make sure this is just for post and not OPTIONS
 before '/api/*' do
+	puts "crap"
 	if request.request_method == "POST"
 		@json_call_params = JSON.parse(request.body.read)
 		puts @json_call_params.inspect
