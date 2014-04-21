@@ -111,6 +111,7 @@ post '/api/track' do
 end
 
 post '/api/logout' do
+	puts "FUCK"
 	response.headers["Access-Control-Allow-Origin"] = "*"
 	if @json_call_params['email'] == nil || @json_call_params['key'] == nil || @json_call_params['account'] == nil
 		puts "missing paramenter"
