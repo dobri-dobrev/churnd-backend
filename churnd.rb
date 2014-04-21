@@ -38,7 +38,6 @@ end
 
 #need to make sure this is just for post and not OPTIONS
 before '/api/*' do
-	puts "crap"
 	if request.request_method == "POST"
 		@json_call_params = JSON.parse(request.body.read)
 		puts @json_call_params.inspect
@@ -49,7 +48,7 @@ before '/api/*' do
 		else
 			p = Project.where(_id: @json_call_params['key']).to_a
 			if p.length == 0
-				puts "not project with this key"
+				
 				halt 404
 			else
 				@current_project = p[0]
@@ -76,7 +75,7 @@ post '/api/login' do
 			if @json_call_params['name'] == nil
 				@json_call_params['name'] = 'anon'
 			end
-			User.create(name: @json_call_params['name'], email: @json_call_params['email'], project_id: @json_call_params['key'], account_name: current_account._id)
+			User.create(name: @json_call_params['name'], email: @json_call_params['email'], project_id: @json_call_params['key'], account_id: current_account._id)
 			current_account.user_count += 1
 			current_account.save
 			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_id: current_account._id, type: "login", time: DateTime.now)
@@ -112,22 +111,21 @@ post '/api/track' do
 end
 
 post '/api/logout' do
-	puts "FUCK"
 	response.headers["Access-Control-Allow-Origin"] = "*"
 	if @json_call_params['email'] == nil || @json_call_params['key'] == nil || @json_call_params['account'] == nil
-		puts "missing paramenter"
+		
 		halt 404
 	else
 		current_account = Account.where(project_id: @json_call_params['key'], name: @json_call_params['account']).to_a[0]
 		if current_account.nil?
-			puts "account does not exist"
+			
 			halt 404
 		end
 		if User.where(email: @json_call_params['email'], project_id: @json_call_params['key'], account_id: current_account._id).exists?
 			Interaction.create(email: @json_call_params['email'], project_id: @json_call_params['key'], account_id: current_account._id, type: "logout", time: DateTime.now)
 			halt 200
 		else
-			puts "user does not exist"
+			
 			halt 404
 		end
 		
