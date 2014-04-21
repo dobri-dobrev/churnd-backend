@@ -226,7 +226,10 @@ post '/new_account' do
 	else
 		@project_to_add_to = projects[0]
 		unless Account.where(name: params[:account_name], project_id: @project_to_add_to._id).exists?
-			Account.create(name: params[:account_name], project_id: @project_to_add_to._id, user_count: 0, data_by_week: [])
+			acc = Account.create(name: params[:account_name], project_id: @project_to_add_to._id, user_count: 0, data_by_week: [], total_interaction_use: [])
+			for x in @project_to_add_to.interaction_types
+				acc.total_interaction_use << 0.0
+			end
 		end
 		
 		{:ret => 'win'}.to_json
