@@ -82,7 +82,7 @@
       <legend> Engagement </legend>
 	<div class="large-6 columns">
 
-    <% if @project_to_view.total_interaction_type_use.nil? %>
+    <% if @project_to_view.total_interaction_type_use[0]==0.0 and @project_to_view.total_interaction_type_use[1]==0.0  %>
     <div class="panel">
                 <h5><a href="#">No Interactions Yet</a></h5>
  
@@ -100,7 +100,7 @@
   </div>
 
   <div class="large-6 columns">
-    <% if @project_to_view.weekly_interaction_type_use.nil? %>
+    <% if @project_to_view.total_interaction_type_use[0]==0.0 and @project_to_view.total_interaction_type_use[1]==0.0 %>
 
 
     <% else %>  

@@ -4,6 +4,11 @@ mongod --dbpath /Users/dobridobrev/Documents/programming/mongoData
 delete expandedaccounts.erb
 
 Heroku RickArmaanDobri
+mongohq
+armaan
+RickDobriArmaan
+mongo oceanic.mongohq.com:10086/app23025600 -u armaan -p RickDobriArmaan
+
 
 feature - currentproject ->interaction types
 
